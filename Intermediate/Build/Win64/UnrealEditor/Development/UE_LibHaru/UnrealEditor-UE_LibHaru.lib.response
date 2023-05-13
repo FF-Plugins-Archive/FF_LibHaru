@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-UE_LibHaru.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Intermediate\Build\Win64\FF_Plugins_MobileEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"E:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\UE_LibHaru\Intermediate\Build\Win64\UnrealEditor\Development\UE_LibHaru\Module.UE_LibHaru.cpp.obj"
+"E:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\UE_LibHaru\Intermediate\Build\Win64\UnrealEditor\Development\UE_LibHaru\Default.rc2.res"
+/OUT:"E:\Epic\Projects\FROZEN\SDKs\FF_Plugins_Mobile\Plugins\UE_LibHaru\Intermediate\Build\Win64\UnrealEditor\Development\UE_LibHaru\UnrealEditor-UE_LibHaru.lib"
