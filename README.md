@@ -1,2 +1,32 @@
 # UE_LibHaru
- 
+
+# TARGET PLATFORM
+* It currently only works on Windows platform.
+
+# LIBHARU WRITE FUNCTIONS
+* <b>LibHaru - Create Document</b>: It creates a LibHaru based PDF file. It's object is different than PDFium's. So, you can't merge them unless export it and then re-import it, first.
+
+* <b>LibHaru - Add Pages</b>: It adds pages to target PDF file with defined size. (Array count is page count and each vector element of array is its size)
+
+* <b>LibHaru - Load Standart Font</b>: There are 14 standart fonts embedded to PDF libraries according to PDF Spec 1.7 page 416. This function allows to select one them.
+
+* <b>LibHaru - Add Text</b>: It adds text objects to target page. Libharu doesn't support line break at default but we integrated a parse system. So it has auto wrap feature. Neverthless, we suggest you that be careful about your layout (for example when will you create a line break or not)
+	* Text Color
+	* Position X = Horizontal position.
+	* Position Y = Vertical position but it starts from bottom. If your PDF page's height is 800 pixel, top will be 800 and bottom will be 0.
+	* Shear X and Y = It strecth your text object. Scaling won't be vectoral. So we don't suggest it.
+	* Rotation X and Y = We don't know how it works right now.
+	* Border X and Y = It defines vertical and horizontal borders.
+	
+* <b>LibHaru - Add Image</b>: It adds an UTexture2D to target PDF's target page. Extension and format is not important. Function converts its data to RGB Raw Data.
+
+* <b>LibHaru - Save PDF</b>: It saves PDF file to given absolute path. You don't need to spawn anything to use this function like PDFium.
+
+* <b>LibHaru - Save as Bytes</b>: It saves PDF as bytes array (TArray<uint8>). So, you can render it with PDFium without writing and reading a PDF file.
+
+* <b>LibHaru - Close Document</b> 
+
+# ROADMAP
+* Load external fonts
+* Mobile Support
+* 3D Model integration (PDFs supports u3d extensions.)
