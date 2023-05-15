@@ -1,5 +1,11 @@
 # UE_LibHaru
 
+# USED LIBRARY
+https://github.com/libharu/libharu
+
+# DEPENDENCIES
+https://github.com/FF-Projects-UE/ExtendedVars
+
 # TARGET PLATFORM
 * It currently only works on Windows platform.
 
