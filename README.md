@@ -16,6 +16,8 @@ https://github.com/FF-Projects-UE/ExtendedVars
 
 * <b>LibHaru - Load Standart Font</b>: There are 14 standart fonts embedded to PDF libraries according to PDF Spec 1.7 page 416. This function allows to select one them.
 
+* <b>LibHaru - Load External Font</b>:
+
 * <b>LibHaru - Add Text</b>: It adds text objects to target page. Libharu doesn't support line break at default but we integrated a parse system. So it has auto wrap feature. Neverthless, we suggest you that be careful about your layout (for example when will you create a line break or not)
 	* Text Color
 	* Position X = Horizontal position.
@@ -25,6 +27,8 @@ https://github.com/FF-Projects-UE/ExtendedVars
 	* Border X and Y = It defines vertical and horizontal borders.
 	
 * <b>LibHaru - Add Image</b>: It adds an UTexture2D to target PDF's target page. Extension and format is not important. Function converts its data to RGB Raw Data.
+
+* <b>LibHaru - Add Line</b>: It adds a line to target PDF's target page at specified start and end points with specified color and width.
 
 * <b>LibHaru - Save PDF</b>: It saves PDF file to given absolute path. You don't need to spawn anything to use this function like PDFium.
 
