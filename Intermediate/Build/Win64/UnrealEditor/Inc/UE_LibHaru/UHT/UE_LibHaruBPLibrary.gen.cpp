@@ -212,6 +212,19 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Save_PDF(Z_Param_Out_In_PDF,Z_Param_Export_Path);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Add_Line)
+	{
+		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_In_PDF);
+		P_GET_STRUCT(FVector2D,Z_Param_Start);
+		P_GET_STRUCT(FVector2D,Z_Param_End);
+		P_GET_PROPERTY(FIntProperty,Z_Param_Line_Width);
+		P_GET_STRUCT(FLinearColor,Z_Param_Line_Color);
+		P_GET_PROPERTY(FIntProperty,Z_Param_Page_Index);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Add_Line(Z_Param_Out_In_PDF,Z_Param_Start,Z_Param_End,Z_Param_Line_Width,Z_Param_Line_Color,Z_Param_Page_Index);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Add_Image)
 	{
 		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_In_PDF);
@@ -239,6 +252,16 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		UUE_LibHaruBPLibrary::LibHaru_Add_Texts(FDelegateLibharu(Z_Param_DelegateAddObject),Z_Param_Out_In_PDF,Z_Param_Out_In_Font,Z_Param_In_Texts,Z_Param_Text_Color,Z_Param_Position,Z_Param_Size,Z_Param_Rotation,Z_Param_Border,Z_Param_FontSize,Z_Param_PageIndex);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Load_Font_External)
+	{
+		P_GET_OBJECT_REF(ULibHaruFont,Z_Param_Out_Out_Font);
+		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_In_PDF);
+		P_GET_PROPERTY(FStrProperty,Z_Param_In_Path);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Load_Font_External(Z_Param_Out_Out_Font,Z_Param_Out_In_PDF,Z_Param_In_Path);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Load_Font_Standart)
@@ -276,10 +299,12 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		UClass* Class = UUE_LibHaruBPLibrary::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "LibHaru_Add_Image", &UUE_LibHaruBPLibrary::execLibHaru_Add_Image },
+			{ "LibHaru_Add_Line", &UUE_LibHaruBPLibrary::execLibHaru_Add_Line },
 			{ "LibHaru_Add_Pages", &UUE_LibHaruBPLibrary::execLibHaru_Add_Pages },
 			{ "LibHaru_Add_Texts", &UUE_LibHaruBPLibrary::execLibHaru_Add_Texts },
 			{ "LibHaru_Close_Document", &UUE_LibHaruBPLibrary::execLibHaru_Close_Document },
 			{ "LibHaru_Create_Doc", &UUE_LibHaruBPLibrary::execLibHaru_Create_Doc },
+			{ "LibHaru_Load_Font_External", &UUE_LibHaruBPLibrary::execLibHaru_Load_Font_External },
 			{ "LibHaru_Load_Font_Standart", &UUE_LibHaruBPLibrary::execLibHaru_Load_Font_Standart },
 			{ "LibHaru_Save_As_Bytes", &UUE_LibHaruBPLibrary::execLibHaru_Save_As_Bytes },
 			{ "LibHaru_Save_PDF", &UUE_LibHaruBPLibrary::execLibHaru_Save_PDF },
@@ -326,9 +351,9 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Image_Statics::Function_MetaDataParams[] = {
-		{ "Category", "PDF_Reader|LibHaru|Write" },
+		{ "Category", "LibHaru|Write" },
 		{ "DisplayName", "LibHaru - Add Image" },
-		{ "Keywords", "libharu, pdf, add, doc, document, image, images" },
+		{ "Keywords", "libharu, pdf, add, draw, doc, document, image, images" },
 		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
 		{ "ToolTip", "" },
 	};
@@ -340,6 +365,74 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Image_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics
+	{
+		struct UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms
+		{
+			ULibHaruDoc* In_PDF;
+			FVector2D Start;
+			FVector2D End;
+			int32 Line_Width;
+			FLinearColor Line_Color;
+			int32 Page_Index;
+			bool ReturnValue;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_PDF;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Start;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_End;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Line_Width;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Line_Color;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Page_Index;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_In_PDF = { "In_PDF", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, In_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Start = { "Start", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, Start), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_End = { "End", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, End), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Line_Width = { "Line_Width", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, Line_Width), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Line_Color = { "Line_Color", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, Line_Color), Z_Construct_UScriptStruct_FLinearColor, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Page_Index = { "Page_Index", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, Page_Index), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms), &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_In_PDF,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Start,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_End,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Line_Width,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Line_Color,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Page_Index,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LibHaru|Write" },
+		{ "CPP_Default_Line_Color", "(R=0.000000,G=0.000000,B=0.000000,A=1.000000)" },
+		{ "CPP_Default_Line_Width", "1" },
+		{ "CPP_Default_Page_Index", "0" },
+		{ "DisplayName", "LibHaru - Add Line" },
+		{ "Keywords", "libharu, pdf, add, draw, doc, document, line, lines" },
+		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
+		{ "ToolTip", "" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UUE_LibHaruBPLibrary, nullptr, "LibHaru_Add_Line", nullptr, nullptr, sizeof(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms), Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04C22401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -391,7 +484,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Pages_Statics::Function_MetaDataParams[] = {
-		{ "Category", "PDF_Reader|LibHaru|Write" },
+		{ "Category", "LibHaru|Write" },
 		{ "DisplayName", "LibHaru - Add Pages" },
 		{ "Keywords", "libharu, pdf, add, doc, document, page, pages" },
 		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
@@ -467,7 +560,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Texts_Statics::Function_MetaDataParams[] = {
-		{ "Category", "PDF_Reader|LibHaru|Write" },
+		{ "Category", "LibHaru|Write" },
 		{ "Comment", "/*\n\x09* @param Position X value starts from left, Y value starts from bottom.\n\x09*/" },
 		{ "CPP_Default_Border", "(X=10.000,Y=10.000)" },
 		{ "CPP_Default_FontSize", "12" },
@@ -520,7 +613,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Close_Document_Statics::Function_MetaDataParams[] = {
-		{ "Category", "PDF_Reader|LibHaru|System" },
+		{ "Category", "LibHaru|System" },
 		{ "DisplayName", "LibHaru - Close Document" },
 		{ "Keywords", "libharu, pdf, doc, document, close" },
 		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
@@ -565,7 +658,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Create_Doc_Statics::Function_MetaDataParams[] = {
-		{ "Category", "PDF_Reader|LibHaru|Write" },
+		{ "Category", "LibHaru|Write" },
 		{ "DisplayName", "LibHaru - Create Document" },
 		{ "Keywords", "libharu, pdf, create, doc, document" },
 		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
@@ -579,6 +672,58 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Create_Doc_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics
+	{
+		struct UE_LibHaruBPLibrary_eventLibHaru_Load_Font_External_Parms
+		{
+			ULibHaruFont* Out_Font;
+			ULibHaruDoc* In_PDF;
+			FString In_Path;
+			bool ReturnValue;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Out_Font;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_PDF;
+		static const UECodeGen_Private::FStrPropertyParams NewProp_In_Path;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::NewProp_Out_Font = { "Out_Font", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Load_Font_External_Parms, Out_Font), Z_Construct_UClass_ULibHaruFont_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::NewProp_In_PDF = { "In_PDF", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Load_Font_External_Parms, In_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::NewProp_In_Path = { "In_Path", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Load_Font_External_Parms, In_Path), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((UE_LibHaruBPLibrary_eventLibHaru_Load_Font_External_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UE_LibHaruBPLibrary_eventLibHaru_Load_Font_External_Parms), &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::NewProp_Out_Font,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::NewProp_In_PDF,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::NewProp_In_Path,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LibHaru|Write" },
+		{ "DisplayName", "LibHaru - Load External Font" },
+		{ "Keywords", "libharu, pdf, load, font, external" },
+		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UUE_LibHaruBPLibrary, nullptr, "LibHaru_Load_Font_External", nullptr, nullptr, sizeof(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::UE_LibHaruBPLibrary_eventLibHaru_Load_Font_External_Parms), Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -628,7 +773,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_Standart_Statics::Function_MetaDataParams[] = {
-		{ "Category", "PDF_Reader|LibHaru|Write" },
+		{ "Category", "LibHaru|Write" },
 		{ "CPP_Default_Font_Encoding", "STANDARD" },
 		{ "CPP_Default_Font_Name", "Helvetica" },
 		{ "DisplayName", "LibHaru - Load Standart Font" },
@@ -681,7 +826,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::Function_MetaDataParams[] = {
-		{ "Category", "PDF_Reader|LibHaru|Write" },
+		{ "Category", "LibHaru|Write" },
 		{ "DisplayName", "LibHaru - Save as Bytes" },
 		{ "Keywords", "libharu, pdf, doc, document, save, as, bytes" },
 		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
@@ -730,7 +875,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::Function_MetaDataParams[] = {
-		{ "Category", "PDF_Reader|LibHaru|Write" },
+		{ "Category", "LibHaru|Write" },
 		{ "DisplayName", "LibHaru - Save PDF" },
 		{ "Keywords", "libharu, pdf, doc, document, save" },
 		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
@@ -767,14 +912,16 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_UE_LibHaru,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UUE_LibHaruBPLibrary_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Image, "LibHaru_Add_Image" }, // 587015357
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Pages, "LibHaru_Add_Pages" }, // 2189117210
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Texts, "LibHaru_Add_Texts" }, // 1884763231
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Close_Document, "LibHaru_Close_Document" }, // 1180297942
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Create_Doc, "LibHaru_Create_Doc" }, // 41058284
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_Standart, "LibHaru_Load_Font_Standart" }, // 1024936874
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes, "LibHaru_Save_As_Bytes" }, // 3792710221
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF, "LibHaru_Save_PDF" }, // 2456464362
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Image, "LibHaru_Add_Image" }, // 4269619253
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line, "LibHaru_Add_Line" }, // 657800796
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Pages, "LibHaru_Add_Pages" }, // 3217692339
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Texts, "LibHaru_Add_Texts" }, // 3197990319
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Close_Document, "LibHaru_Close_Document" }, // 2147294366
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Create_Doc, "LibHaru_Create_Doc" }, // 2970100166
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External, "LibHaru_Load_Font_External" }, // 1819640416
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_Standart, "LibHaru_Load_Font_Standart" }, // 2922984530
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes, "LibHaru_Save_As_Bytes" }, // 2052218325
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF, "LibHaru_Save_PDF" }, // 569840682
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UUE_LibHaruBPLibrary_Statics::Class_MetaDataParams[] = {
@@ -821,9 +968,9 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_ULibHaruDoc, ULibHaruDoc::StaticClass, TEXT("ULibHaruDoc"), &Z_Registration_Info_UClass_ULibHaruDoc, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULibHaruDoc), 1435911744U) },
 		{ Z_Construct_UClass_ULibHaruFont, ULibHaruFont::StaticClass, TEXT("ULibHaruFont"), &Z_Registration_Info_UClass_ULibHaruFont, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULibHaruFont), 2676193705U) },
-		{ Z_Construct_UClass_UUE_LibHaruBPLibrary, UUE_LibHaruBPLibrary::StaticClass, TEXT("UUE_LibHaruBPLibrary"), &Z_Registration_Info_UClass_UUE_LibHaruBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UUE_LibHaruBPLibrary), 223920592U) },
+		{ Z_Construct_UClass_UUE_LibHaruBPLibrary, UUE_LibHaruBPLibrary::StaticClass, TEXT("UUE_LibHaruBPLibrary"), &Z_Registration_Info_UClass_UUE_LibHaruBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UUE_LibHaruBPLibrary), 3635542431U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_2078760007(TEXT("/Script/UE_LibHaru"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_2893991413(TEXT("/Script/UE_LibHaru"),
 		Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -1782,6 +1782,28 @@ E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Intermediate/B
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Intermediate/Build/Android/UnrealGame/Inc/UE_LibHaru/UHT/UE_LibHaru.init.gen.cpp \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Intermediate/Build/Android/UnrealGame/Inc/UE_LibHaru/UHT/UE_LibHaruBPLibrary.gen.cpp \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/Public/UE_LibHaruBPLibrary.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_config.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_version.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_consts.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_doc.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_catalog.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_objects.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_encoder.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_streams.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_list.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_error.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_types.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_mmgr.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_encrypt.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_image.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_pages.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_gstate.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_font.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_fontdef.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_ext_gstate.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_outline.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_pdfa.h \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/ExtendedVars/Source/ExtendedVars/Public/Extended_Enums.h \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Intermediate/Build/Android/UnrealGame/Inc/UE_LibHaru/UHT/UE_LibHaruBPLibrary.generated.h \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/Private/UE_LibHaru.cpp \

@@ -14,10 +14,12 @@ UUE_LibHaruBPLibrary::UUE_LibHaruBPLibrary(const FObjectInitializer& ObjectIniti
 
 bool UUE_LibHaruBPLibrary::LibHaru_Create_Doc(ULibHaruDoc*& Out_PDF)
 {
-#ifdef _WIN64
 	HPDF_Doc PDF_Document = HPDF_New(NULL, NULL);
+	
 	HPDF_SetCompressionMode(PDF_Document, HPDF_COMP_NONE);
 	HPDF_SetPageMode(PDF_Document, HPDF_PAGE_MODE_USE_OUTLINE);
+	HPDF_UseUTFEncodings(PDF_Document);
+	HPDF_SetCurrentEncoder(PDF_Document, "UTF-8");
 
 	ULibHaruDoc* LibHaru_Object = NewObject<ULibHaruDoc>();
 	LibHaru_Object->Document = PDF_Document;
@@ -25,14 +27,10 @@ bool UUE_LibHaruBPLibrary::LibHaru_Create_Doc(ULibHaruDoc*& Out_PDF)
 	Out_PDF = LibHaru_Object;
 
 	return true;
-#else
-	return false;
-#endif
 }
 
 bool UUE_LibHaruBPLibrary::LibHaru_Add_Pages(UPARAM(ref)ULibHaruDoc*& In_PDF, TArray<FVector2D> Pages, bool bInsertInstead, int32 InsertAfter)
 {
-#ifdef _WIN64
 	if (IsValid(In_PDF) == false)
 	{
 		return false;
@@ -70,14 +68,10 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Pages(UPARAM(ref)ULibHaruDoc*& In_PDF, TA
 	}
 
 	return true;
-#else
-	return false;
-#endif
 }
 
 bool UUE_LibHaruBPLibrary::LibHaru_Load_Font_Standart(ULibHaruFont*& Out_Font, UPARAM(ref)ULibHaruDoc*& In_PDF, EStandartFonts Font_Name, EFontEncodings Font_Encoding)
 {
-#ifdef _WIN64
 	if (IsValid(In_PDF) == false)
 	{
 		return false;
@@ -242,15 +236,51 @@ bool UUE_LibHaruBPLibrary::LibHaru_Load_Font_Standart(ULibHaruFont*& Out_Font, U
 	Out_Font = Font_Object;
 
 	return true;
-#else
-	return false;
-#endif
+}
+
+bool UUE_LibHaruBPLibrary::LibHaru_Load_Font_External(ULibHaruFont*& Out_Font, UPARAM(ref)ULibHaruDoc*& In_PDF, FString In_Path)
+{
+	if (IsValid(In_PDF) == false)
+	{
+		return false;
+	}
+
+	if (!In_PDF->Document)
+	{
+		return false;
+	}
+
+	if (In_Path.IsEmpty() == true)
+	{
+		return false;
+	}
+
+	FPaths::MakeStandardFilename(In_Path);
+	if (FPaths::FileExists(In_Path) == false)
+	{
+		return false;
+	}
+
+	FPaths::MakePlatformFilename(In_Path);
+
+	const char* Font_Chars = HPDF_LoadTTFontFromFile(In_PDF->Document, TCHAR_TO_UTF8(*In_Path), HPDF_TRUE);
+	HPDF_Font Font = HPDF_GetFont(In_PDF->Document, Font_Chars, "UTF-8");
+
+	if (!Font == true)
+	{
+		return false;
+	}
+
+	ULibHaruFont* Font_Object = NewObject<ULibHaruFont>();
+	Font_Object->Font = Font;
+
+	Out_Font = Font_Object;
+
+	return true;
 }
 
 void UUE_LibHaruBPLibrary::LibHaru_Add_Texts(FDelegateLibharu DelegateAddObject, UPARAM(ref)ULibHaruDoc*& In_PDF, UPARAM(ref)ULibHaruFont*& In_Font, FString In_Texts, FLinearColor Text_Color, FVector2D Position, FVector2D Size, FVector2D Rotation, FVector2D Border, int32 FontSize, int32 PageIndex)
 {
-#ifdef _WIN64
-
 	if (IsValid(In_PDF) == false)
 	{
 		DelegateAddObject.Execute(false, "PDF object is not valid.");
@@ -393,14 +423,10 @@ void UUE_LibHaruBPLibrary::LibHaru_Add_Texts(FDelegateLibharu DelegateAddObject,
 			);
 		}
 	);
-#else
-	DelegateAddObject.Execute(false, "PDF writer functions only avaible for Windows at the moment.");
-#endif
 }
 
 bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FVector2D Position, int32 Page_Index)
 {
-#ifdef _WIN64
 	if (IsValid(In_PDF) == false)
 	{
 		return false;
@@ -446,14 +472,32 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UT
 	HPDF_Page_DrawImage(Target_Page, PDF_Image, Position.X, Position.Y, Texture_Width, Texture_Height);
 
 	return true;
-#else
-	return false;
-#endif
+}
+
+bool UUE_LibHaruBPLibrary::LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Start, FVector2D End, int32 Line_Width, FLinearColor Line_Color, int32 Page_Index)
+{
+	if (IsValid(In_PDF) == false)
+	{
+		return false;
+	}
+
+	if (!In_PDF->Document)
+	{
+		return false;
+	}
+	
+	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
+	HPDF_Page_SetLineWidth(Target_Page, Line_Width);
+	HPDF_Page_SetRGBStroke(Target_Page, Line_Color.R, Line_Color.G, Line_Color.B);
+	HPDF_Page_MoveTo(Target_Page, Start.X, Start.Y);
+	HPDF_Page_LineTo(Target_Page, End.X, End.Y);
+	HPDF_Page_Stroke(Target_Page);
+	
+	return true;
 }
 
 bool UUE_LibHaruBPLibrary::LibHaru_Save_PDF(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Export_Path)
 {
-#ifdef _WIN64
 	if (IsValid(In_PDF) == false)
 	{
 		return false;
@@ -472,14 +516,10 @@ bool UUE_LibHaruBPLibrary::LibHaru_Save_PDF(UPARAM(ref)ULibHaruDoc*& In_PDF, FSt
 	HPDF_SaveToFile(In_PDF->Document, TCHAR_TO_UTF8(*Export_Path));
 
 	return true;
-#else
-	return false;
-#endif
 }
 
 bool UUE_LibHaruBPLibrary::LibHaru_Save_As_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF, TArray<uint8>& Export_Bytes)
 {
-#ifdef _WIN64
 	if (IsValid(In_PDF) == false)
 	{
 		return false;
@@ -502,14 +542,10 @@ bool UUE_LibHaruBPLibrary::LibHaru_Save_As_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF
 	Export_Bytes = Array_Bytes;
 	
 	return true;
-#else
-	return false;
-#endif
 }
 
 bool UUE_LibHaruBPLibrary::LibHaru_Close_Document(UPARAM(ref)ULibHaruDoc*& In_PDF)
 {
-#ifdef _WIN64
 	if (IsValid(In_PDF) == false)
 	{
 		return false;
@@ -524,7 +560,4 @@ bool UUE_LibHaruBPLibrary::LibHaru_Close_Document(UPARAM(ref)ULibHaruDoc*& In_PD
 	In_PDF = nullptr;
 
 	return true;
-#else
-	return false;
-#endif
 }
