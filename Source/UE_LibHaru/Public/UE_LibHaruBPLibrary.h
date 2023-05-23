@@ -68,7 +68,16 @@ class UUE_LibHaruBPLibrary : public UBlueprintFunctionLibrary
 	static bool LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FVector2D Position, int32 Page_Index);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Line", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, line, lines"), Category = "LibHaru|Write")
-	static bool LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Start, FVector2D End, int32 Line_Width = 1, FLinearColor Line_Color = FLinearColor::Black, int32 Page_Index = 0);
+	static bool LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Start, FVector2D End, int32 Width = 1, FLinearColor Line_Color = FLinearColor::Black, int32 Page_Index = 0);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Rectangle", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, rectangle, rectangles"), Category = "LibHaru|Write")
+	static bool LibHaru_Add_Rectangle(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Dimensions, int32 Width = 1, FLinearColor Line_Color = FLinearColor::Black, int32 Page_Index = 0);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Arc", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, arc, arcs"), Category = "LibHaru|Write")
+	static bool LibHaru_Add_Arc(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Angles, double Radius, int32 Width = 1, FLinearColor Line_Color = FLinearColor::Black, int32 Page_Index = 0);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Circle", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, circle, circles"), Category = "LibHaru|Write")
+	static bool LibHaru_Add_Circle(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, double Radius, int32 Width = 1, FLinearColor Line_Color = FLinearColor::Black, int32 Page_Index = 0);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Save PDF", ToolTip = "", Keywords = "libharu, pdf, doc, document, save"), Category = "LibHaru|Write")
 	static bool LibHaru_Save_PDF(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Export_Path);

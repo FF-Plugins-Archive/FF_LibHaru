@@ -474,7 +474,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UT
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Start, FVector2D End, int32 Line_Width, FLinearColor Line_Color, int32 Page_Index)
+bool UUE_LibHaruBPLibrary::LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Start, FVector2D End, int32 Width, FLinearColor Line_Color, int32 Page_Index)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -487,12 +487,75 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVe
 	}
 	
 	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
-	HPDF_Page_SetLineWidth(Target_Page, Line_Width);
+	HPDF_Page_SetLineWidth(Target_Page, Width);
 	HPDF_Page_SetRGBStroke(Target_Page, Line_Color.R, Line_Color.G, Line_Color.B);
 	HPDF_Page_MoveTo(Target_Page, Start.X, Start.Y);
 	HPDF_Page_LineTo(Target_Page, End.X, End.Y);
 	HPDF_Page_Stroke(Target_Page);
 	
+	return true;
+}
+
+bool UUE_LibHaruBPLibrary::LibHaru_Add_Rectangle(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Dimensions, int32 Width, FLinearColor Line_Color, int32 Page_Index)
+{
+	if (IsValid(In_PDF) == false)
+	{
+		return false;
+	}
+
+	if (!In_PDF->Document)
+	{
+		return false;
+	}
+
+	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
+	HPDF_Page_SetLineWidth(Target_Page, Width);
+	HPDF_Page_SetRGBStroke(Target_Page, Line_Color.R, Line_Color.G, Line_Color.B);
+	HPDF_Page_Rectangle(Target_Page, Location.X, Location.Y, Dimensions.X, Dimensions.Y);
+	HPDF_Page_Stroke(Target_Page);
+
+	return true;
+}
+
+bool UUE_LibHaruBPLibrary::LibHaru_Add_Arc(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Angles, double Radius, int32 Width, FLinearColor Line_Color, int32 Page_Index)
+{
+	if (IsValid(In_PDF) == false)
+	{
+		return false;
+	}
+
+	if (!In_PDF->Document)
+	{
+		return false;
+	}
+
+	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
+	HPDF_Page_SetLineWidth(Target_Page, Width);
+	HPDF_Page_SetRGBStroke(Target_Page, Line_Color.R, Line_Color.G, Line_Color.B);
+	HPDF_Page_Arc(Target_Page, Location.X, Location.Y, Radius, Angles.X, Angles.Y);
+	HPDF_Page_Stroke(Target_Page);
+
+	return true;
+}
+
+bool UUE_LibHaruBPLibrary::LibHaru_Add_Circle(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, double Radius, int32 Width, FLinearColor Line_Color, int32 Page_Index)
+{
+	if (IsValid(In_PDF) == false)
+	{
+		return false;
+	}
+
+	if (!In_PDF->Document)
+	{
+		return false;
+	}
+
+	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
+	HPDF_Page_SetLineWidth(Target_Page, Width);
+	HPDF_Page_SetRGBStroke(Target_Page, Line_Color.R, Line_Color.G, Line_Color.B);
+	HPDF_Page_Circle(Target_Page, Location.X, Location.Y, Radius);
+	HPDF_Page_Stroke(Target_Page);
+
 	return true;
 }
 

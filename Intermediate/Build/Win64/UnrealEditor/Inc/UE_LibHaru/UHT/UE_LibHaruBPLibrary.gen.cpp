@@ -212,17 +212,57 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Save_PDF(Z_Param_Out_In_PDF,Z_Param_Export_Path);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Add_Circle)
+	{
+		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_In_PDF);
+		P_GET_STRUCT(FVector2D,Z_Param_Location);
+		P_GET_PROPERTY(FDoubleProperty,Z_Param_Radius);
+		P_GET_PROPERTY(FIntProperty,Z_Param_Width);
+		P_GET_STRUCT(FLinearColor,Z_Param_Line_Color);
+		P_GET_PROPERTY(FIntProperty,Z_Param_Page_Index);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Add_Circle(Z_Param_Out_In_PDF,Z_Param_Location,Z_Param_Radius,Z_Param_Width,Z_Param_Line_Color,Z_Param_Page_Index);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Add_Arc)
+	{
+		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_In_PDF);
+		P_GET_STRUCT(FVector2D,Z_Param_Location);
+		P_GET_STRUCT(FVector2D,Z_Param_Angles);
+		P_GET_PROPERTY(FDoubleProperty,Z_Param_Radius);
+		P_GET_PROPERTY(FIntProperty,Z_Param_Width);
+		P_GET_STRUCT(FLinearColor,Z_Param_Line_Color);
+		P_GET_PROPERTY(FIntProperty,Z_Param_Page_Index);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Add_Arc(Z_Param_Out_In_PDF,Z_Param_Location,Z_Param_Angles,Z_Param_Radius,Z_Param_Width,Z_Param_Line_Color,Z_Param_Page_Index);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Add_Rectangle)
+	{
+		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_In_PDF);
+		P_GET_STRUCT(FVector2D,Z_Param_Location);
+		P_GET_STRUCT(FVector2D,Z_Param_Dimensions);
+		P_GET_PROPERTY(FIntProperty,Z_Param_Width);
+		P_GET_STRUCT(FLinearColor,Z_Param_Line_Color);
+		P_GET_PROPERTY(FIntProperty,Z_Param_Page_Index);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Add_Rectangle(Z_Param_Out_In_PDF,Z_Param_Location,Z_Param_Dimensions,Z_Param_Width,Z_Param_Line_Color,Z_Param_Page_Index);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Add_Line)
 	{
 		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_In_PDF);
 		P_GET_STRUCT(FVector2D,Z_Param_Start);
 		P_GET_STRUCT(FVector2D,Z_Param_End);
-		P_GET_PROPERTY(FIntProperty,Z_Param_Line_Width);
+		P_GET_PROPERTY(FIntProperty,Z_Param_Width);
 		P_GET_STRUCT(FLinearColor,Z_Param_Line_Color);
 		P_GET_PROPERTY(FIntProperty,Z_Param_Page_Index);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Add_Line(Z_Param_Out_In_PDF,Z_Param_Start,Z_Param_End,Z_Param_Line_Width,Z_Param_Line_Color,Z_Param_Page_Index);
+		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Add_Line(Z_Param_Out_In_PDF,Z_Param_Start,Z_Param_End,Z_Param_Width,Z_Param_Line_Color,Z_Param_Page_Index);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Add_Image)
@@ -298,9 +338,12 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	{
 		UClass* Class = UUE_LibHaruBPLibrary::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "LibHaru_Add_Arc", &UUE_LibHaruBPLibrary::execLibHaru_Add_Arc },
+			{ "LibHaru_Add_Circle", &UUE_LibHaruBPLibrary::execLibHaru_Add_Circle },
 			{ "LibHaru_Add_Image", &UUE_LibHaruBPLibrary::execLibHaru_Add_Image },
 			{ "LibHaru_Add_Line", &UUE_LibHaruBPLibrary::execLibHaru_Add_Line },
 			{ "LibHaru_Add_Pages", &UUE_LibHaruBPLibrary::execLibHaru_Add_Pages },
+			{ "LibHaru_Add_Rectangle", &UUE_LibHaruBPLibrary::execLibHaru_Add_Rectangle },
 			{ "LibHaru_Add_Texts", &UUE_LibHaruBPLibrary::execLibHaru_Add_Texts },
 			{ "LibHaru_Close_Document", &UUE_LibHaruBPLibrary::execLibHaru_Close_Document },
 			{ "LibHaru_Create_Doc", &UUE_LibHaruBPLibrary::execLibHaru_Create_Doc },
@@ -310,6 +353,146 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 			{ "LibHaru_Save_PDF", &UUE_LibHaruBPLibrary::execLibHaru_Save_PDF },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics
+	{
+		struct UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms
+		{
+			ULibHaruDoc* In_PDF;
+			FVector2D Location;
+			FVector2D Angles;
+			double Radius;
+			int32 Width;
+			FLinearColor Line_Color;
+			int32 Page_Index;
+			bool ReturnValue;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_PDF;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Location;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Angles;
+		static const UECodeGen_Private::FDoublePropertyParams NewProp_Radius;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Width;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Line_Color;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Page_Index;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_In_PDF = { "In_PDF", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms, In_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Location = { "Location", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms, Location), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Angles = { "Angles", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms, Angles), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FDoublePropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Radius = { "Radius", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Double, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms, Radius), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Width = { "Width", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms, Width), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Line_Color = { "Line_Color", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms, Line_Color), Z_Construct_UScriptStruct_FLinearColor, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Page_Index = { "Page_Index", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms, Page_Index), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms), &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_In_PDF,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Location,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Angles,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Radius,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Width,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Line_Color,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_Page_Index,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LibHaru|Write" },
+		{ "CPP_Default_Line_Color", "(R=0.000000,G=0.000000,B=0.000000,A=1.000000)" },
+		{ "CPP_Default_Page_Index", "0" },
+		{ "CPP_Default_Width", "1" },
+		{ "DisplayName", "LibHaru - Add Arc" },
+		{ "Keywords", "libharu, pdf, add, draw, doc, document, arc, arcs" },
+		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
+		{ "ToolTip", "" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UUE_LibHaruBPLibrary, nullptr, "LibHaru_Add_Arc", nullptr, nullptr, sizeof(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::UE_LibHaruBPLibrary_eventLibHaru_Add_Arc_Parms), Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04C22401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics
+	{
+		struct UE_LibHaruBPLibrary_eventLibHaru_Add_Circle_Parms
+		{
+			ULibHaruDoc* In_PDF;
+			FVector2D Location;
+			double Radius;
+			int32 Width;
+			FLinearColor Line_Color;
+			int32 Page_Index;
+			bool ReturnValue;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_PDF;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Location;
+		static const UECodeGen_Private::FDoublePropertyParams NewProp_Radius;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Width;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Line_Color;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Page_Index;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_In_PDF = { "In_PDF", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Circle_Parms, In_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_Location = { "Location", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Circle_Parms, Location), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FDoublePropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_Radius = { "Radius", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Double, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Circle_Parms, Radius), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_Width = { "Width", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Circle_Parms, Width), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_Line_Color = { "Line_Color", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Circle_Parms, Line_Color), Z_Construct_UScriptStruct_FLinearColor, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_Page_Index = { "Page_Index", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Circle_Parms, Page_Index), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((UE_LibHaruBPLibrary_eventLibHaru_Add_Circle_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UE_LibHaruBPLibrary_eventLibHaru_Add_Circle_Parms), &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_In_PDF,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_Location,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_Radius,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_Width,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_Line_Color,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_Page_Index,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LibHaru|Write" },
+		{ "CPP_Default_Line_Color", "(R=0.000000,G=0.000000,B=0.000000,A=1.000000)" },
+		{ "CPP_Default_Page_Index", "0" },
+		{ "CPP_Default_Width", "1" },
+		{ "DisplayName", "LibHaru - Add Circle" },
+		{ "Keywords", "libharu, pdf, add, draw, doc, document, circle, circles" },
+		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
+		{ "ToolTip", "" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UUE_LibHaruBPLibrary, nullptr, "LibHaru_Add_Circle", nullptr, nullptr, sizeof(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::UE_LibHaruBPLibrary_eventLibHaru_Add_Circle_Parms), Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04C22401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Image_Statics
 	{
@@ -375,7 +558,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 			ULibHaruDoc* In_PDF;
 			FVector2D Start;
 			FVector2D End;
-			int32 Line_Width;
+			int32 Width;
 			FLinearColor Line_Color;
 			int32 Page_Index;
 			bool ReturnValue;
@@ -383,7 +566,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_PDF;
 		static const UECodeGen_Private::FStructPropertyParams NewProp_Start;
 		static const UECodeGen_Private::FStructPropertyParams NewProp_End;
-		static const UECodeGen_Private::FIntPropertyParams NewProp_Line_Width;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Width;
 		static const UECodeGen_Private::FStructPropertyParams NewProp_Line_Color;
 		static const UECodeGen_Private::FIntPropertyParams NewProp_Page_Index;
 		static void NewProp_ReturnValue_SetBit(void* Obj);
@@ -397,7 +580,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_In_PDF = { "In_PDF", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, In_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Start = { "Start", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, Start), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_End = { "End", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, End), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Line_Width = { "Line_Width", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, Line_Width), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Width = { "Width", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, Width), METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Line_Color = { "Line_Color", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, Line_Color), Z_Construct_UScriptStruct_FLinearColor, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Page_Index = { "Page_Index", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Line_Parms, Page_Index), METADATA_PARAMS(nullptr, 0) };
 	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_ReturnValue_SetBit(void* Obj)
@@ -409,7 +592,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_In_PDF,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Start,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_End,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Line_Width,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Width,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Line_Color,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_Page_Index,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::NewProp_ReturnValue,
@@ -418,8 +601,8 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line_Statics::Function_MetaDataParams[] = {
 		{ "Category", "LibHaru|Write" },
 		{ "CPP_Default_Line_Color", "(R=0.000000,G=0.000000,B=0.000000,A=1.000000)" },
-		{ "CPP_Default_Line_Width", "1" },
 		{ "CPP_Default_Page_Index", "0" },
+		{ "CPP_Default_Width", "1" },
 		{ "DisplayName", "LibHaru - Add Line" },
 		{ "Keywords", "libharu, pdf, add, draw, doc, document, line, lines" },
 		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
@@ -498,6 +681,74 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Pages_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics
+	{
+		struct UE_LibHaruBPLibrary_eventLibHaru_Add_Rectangle_Parms
+		{
+			ULibHaruDoc* In_PDF;
+			FVector2D Location;
+			FVector2D Dimensions;
+			int32 Width;
+			FLinearColor Line_Color;
+			int32 Page_Index;
+			bool ReturnValue;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_PDF;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Location;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Dimensions;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Width;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Line_Color;
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Page_Index;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_In_PDF = { "In_PDF", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Rectangle_Parms, In_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_Location = { "Location", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Rectangle_Parms, Location), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_Dimensions = { "Dimensions", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Rectangle_Parms, Dimensions), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_Width = { "Width", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Rectangle_Parms, Width), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_Line_Color = { "Line_Color", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Rectangle_Parms, Line_Color), Z_Construct_UScriptStruct_FLinearColor, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_Page_Index = { "Page_Index", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Add_Rectangle_Parms, Page_Index), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((UE_LibHaruBPLibrary_eventLibHaru_Add_Rectangle_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UE_LibHaruBPLibrary_eventLibHaru_Add_Rectangle_Parms), &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_In_PDF,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_Location,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_Dimensions,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_Width,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_Line_Color,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_Page_Index,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LibHaru|Write" },
+		{ "CPP_Default_Line_Color", "(R=0.000000,G=0.000000,B=0.000000,A=1.000000)" },
+		{ "CPP_Default_Page_Index", "0" },
+		{ "CPP_Default_Width", "1" },
+		{ "DisplayName", "LibHaru - Add Rectangle" },
+		{ "Keywords", "libharu, pdf, add, draw, doc, document, rectangle, rectangles" },
+		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
+		{ "ToolTip", "" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UUE_LibHaruBPLibrary, nullptr, "LibHaru_Add_Rectangle", nullptr, nullptr, sizeof(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::UE_LibHaruBPLibrary_eventLibHaru_Add_Rectangle_Parms), Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04C22401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -912,9 +1163,12 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_UE_LibHaru,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UUE_LibHaruBPLibrary_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Arc, "LibHaru_Add_Arc" }, // 2690720702
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Circle, "LibHaru_Add_Circle" }, // 2018150218
 		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Image, "LibHaru_Add_Image" }, // 4269619253
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line, "LibHaru_Add_Line" }, // 657800796
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Line, "LibHaru_Add_Line" }, // 1568498477
 		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Pages, "LibHaru_Add_Pages" }, // 3217692339
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Rectangle, "LibHaru_Add_Rectangle" }, // 17622021
 		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Add_Texts, "LibHaru_Add_Texts" }, // 3197990319
 		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Close_Document, "LibHaru_Close_Document" }, // 2147294366
 		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Create_Doc, "LibHaru_Create_Doc" }, // 2970100166
@@ -968,9 +1222,9 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_ULibHaruDoc, ULibHaruDoc::StaticClass, TEXT("ULibHaruDoc"), &Z_Registration_Info_UClass_ULibHaruDoc, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULibHaruDoc), 1435911744U) },
 		{ Z_Construct_UClass_ULibHaruFont, ULibHaruFont::StaticClass, TEXT("ULibHaruFont"), &Z_Registration_Info_UClass_ULibHaruFont, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULibHaruFont), 2676193705U) },
-		{ Z_Construct_UClass_UUE_LibHaruBPLibrary, UUE_LibHaruBPLibrary::StaticClass, TEXT("UUE_LibHaruBPLibrary"), &Z_Registration_Info_UClass_UUE_LibHaruBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UUE_LibHaruBPLibrary), 3635542431U) },
+		{ Z_Construct_UClass_UUE_LibHaruBPLibrary, UUE_LibHaruBPLibrary::StaticClass, TEXT("UUE_LibHaruBPLibrary"), &Z_Registration_Info_UClass_UUE_LibHaruBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UUE_LibHaruBPLibrary), 1479670566U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_2893991413(TEXT("/Script/UE_LibHaru"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_1274748477(TEXT("/Script/UE_LibHaru"),
 		Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

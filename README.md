@@ -1,6 +1,7 @@
 # UE_LibHaru
 
 # USED LIBRARY
+LibHaru (We didn't use ZLIB, LIBJPEG or LIBPNG) <br />
 https://github.com/libharu/libharu
 
 # DEPENDENCIES
@@ -28,7 +29,7 @@ https://github.com/FF-Projects-UE/ExtendedVars
 	
 * <b>LibHaru - Add Image</b>: It adds an UTexture2D to target PDF's target page. Extension and format is not important. Function converts its data to RGB Raw Data.
 
-* <b>LibHaru - Add Line</b>: It adds a line to target PDF's target page at specified start and end points with specified color and width.
+* <b>LibHaru - Add Line, Circle and Arc</b>: It draws line, circle, arc or rectangle to target PDF's target page with specified properties.
 
 * <b>LibHaru - Save PDF</b>: It saves PDF file to given absolute path. You don't need to spawn anything to use this function like PDFium.
 
@@ -37,6 +38,5 @@ https://github.com/FF-Projects-UE/ExtendedVars
 * <b>LibHaru - Close Document</b> 
 
 # ROADMAP
-* Load external fonts
 * Mobile Support
 * 3D Model integration (PDFs supports u3d extensions.)
