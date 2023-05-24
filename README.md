@@ -41,4 +41,3 @@ https://github.com/FF-Projects-UE/ExtendedVars
 
 # ROADMAP
 * Mobile Support
-* 3D Model integration (PDFs supports u3d extensions.)
