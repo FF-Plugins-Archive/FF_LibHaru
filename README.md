@@ -31,7 +31,7 @@ https://github.com/FF-Projects-UE/ExtendedVars
 
 * <b>LibHaru - Add Line, Circle, Ellipse, Arc and Rectangle</b>: It draws line, circle, ellipse, arc or rectangle to target page with specified properties.
 
-* <b>LibHaru - Add U3D 3D Model to PDF</b>: It adds a U3D 3D model to target page. You can define background color, viewer size and location. You can convert your models to U3D with Aspose OBJ/GLTF/FBX online converter to U3D or you can use local tools like CAD Exchanger. U3D extension is very primitive. So, don't expect realistic views.
+* <b>LibHaru - Add U3D 3D Model to PDF</b>: It adds a U3D 3D model to target page. You can define background color, viewer size and location. You can convert your models to U3D with Aspose OBJ/GLTF/FBX online converter to U3D or you can use local tools like CAD Exchanger. U3D extension is very primitive. So, don't expect realistic views. Google Chrome and other basic PDF viewers can't show 3D contents on PDF pages. You have to use Acrobat Pro like professional tools to view it.
 
 * <b>LibHaru - Save PDF</b>: It saves PDF file to given absolute path. You don't need to spawn anything to use this function like PDFium.
 
