@@ -14,6 +14,7 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 	ENGINE_API UClass* Z_Construct_UClass_UBlueprintFunctionLibrary();
 	ENGINE_API UClass* Z_Construct_UClass_UTexture2D_NoRegister();
+	EXTENDEDVARS_API UClass* Z_Construct_UClass_UBytesObject_64_NoRegister();
 	EXTENDEDVARS_API UEnum* Z_Construct_UEnum_ExtendedVars_EFontEncodings();
 	EXTENDEDVARS_API UEnum* Z_Construct_UEnum_ExtendedVars_EStandartFonts();
 	UE_LIBHARU_API UClass* Z_Construct_UClass_ULibHaruDoc();
@@ -194,22 +195,22 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Close_Document(Z_Param_Out_In_PDF);
 		P_NATIVE_END;
 	}
-	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Save_As_Bytes)
+	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Save_Bytes)
 	{
 		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_In_PDF);
-		P_GET_TARRAY_REF(uint8,Z_Param_Out_Export_Bytes);
+		P_GET_OBJECT_REF(UBytesObject_64,Z_Param_Out_Out_Bytes);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Save_As_Bytes(Z_Param_Out_In_PDF,Z_Param_Out_Export_Bytes);
+		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Save_Bytes(Z_Param_Out_In_PDF,Z_Param_Out_Out_Bytes);
 		P_NATIVE_END;
 	}
-	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Save_PDF)
+	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Save_File)
 	{
 		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_In_PDF);
 		P_GET_PROPERTY(FStrProperty,Z_Param_Export_Path);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Save_PDF(Z_Param_Out_In_PDF,Z_Param_Export_Path);
+		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Save_File(Z_Param_Out_In_PDF,Z_Param_Export_Path);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Add_Ellipse)
@@ -353,6 +354,15 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Add_Pages(Z_Param_Out_In_PDF,Z_Param_Pages,Z_Param_bInsertInstead,Z_Param_InsertAfter);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Read_Bytes)
+	{
+		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_Out_PDF);
+		P_GET_OBJECT(UBytesObject_64,Z_Param_In_Bytes);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=UUE_LibHaruBPLibrary::LibHaru_Read_Bytes(Z_Param_Out_Out_PDF,Z_Param_In_Bytes);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UUE_LibHaruBPLibrary::execLibHaru_Create_Doc)
 	{
 		P_GET_OBJECT_REF(ULibHaruDoc,Z_Param_Out_Out_PDF);
@@ -378,8 +388,9 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 			{ "LibHaru_Create_Doc", &UUE_LibHaruBPLibrary::execLibHaru_Create_Doc },
 			{ "LibHaru_Load_Font_External", &UUE_LibHaruBPLibrary::execLibHaru_Load_Font_External },
 			{ "LibHaru_Load_Font_Standart", &UUE_LibHaruBPLibrary::execLibHaru_Load_Font_Standart },
-			{ "LibHaru_Save_As_Bytes", &UUE_LibHaruBPLibrary::execLibHaru_Save_As_Bytes },
-			{ "LibHaru_Save_PDF", &UUE_LibHaruBPLibrary::execLibHaru_Save_PDF },
+			{ "LibHaru_Read_Bytes", &UUE_LibHaruBPLibrary::execLibHaru_Read_Bytes },
+			{ "LibHaru_Save_Bytes", &UUE_LibHaruBPLibrary::execLibHaru_Save_Bytes },
+			{ "LibHaru_Save_File", &UUE_LibHaruBPLibrary::execLibHaru_Save_File },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -1211,17 +1222,16 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics
+	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics
 	{
-		struct UE_LibHaruBPLibrary_eventLibHaru_Save_As_Bytes_Parms
+		struct UE_LibHaruBPLibrary_eventLibHaru_Read_Bytes_Parms
 		{
-			ULibHaruDoc* In_PDF;
-			TArray<uint8> Export_Bytes;
+			ULibHaruDoc* Out_PDF;
+			UBytesObject_64* In_Bytes;
 			bool ReturnValue;
 		};
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_PDF;
-		static const UECodeGen_Private::FBytePropertyParams NewProp_Export_Bytes_Inner;
-		static const UECodeGen_Private::FArrayPropertyParams NewProp_Export_Bytes;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Out_PDF;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_Bytes;
 		static void NewProp_ReturnValue_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -1230,42 +1240,89 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::NewProp_In_PDF = { "In_PDF", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Save_As_Bytes_Parms, In_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::NewProp_Export_Bytes_Inner = { "Export_Bytes", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::NewProp_Export_Bytes = { "Export_Bytes", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Save_As_Bytes_Parms, Export_Bytes), EArrayPropertyFlags::None, METADATA_PARAMS(nullptr, 0) };
-	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::NewProp_Out_PDF = { "Out_PDF", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Read_Bytes_Parms, Out_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::NewProp_In_Bytes = { "In_Bytes", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Read_Bytes_Parms, In_Bytes), Z_Construct_UClass_UBytesObject_64_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 	{
-		((UE_LibHaruBPLibrary_eventLibHaru_Save_As_Bytes_Parms*)Obj)->ReturnValue = 1;
+		((UE_LibHaruBPLibrary_eventLibHaru_Read_Bytes_Parms*)Obj)->ReturnValue = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UE_LibHaruBPLibrary_eventLibHaru_Save_As_Bytes_Parms), &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::NewProp_In_PDF,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::NewProp_Export_Bytes_Inner,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::NewProp_Export_Bytes,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::NewProp_ReturnValue,
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UE_LibHaruBPLibrary_eventLibHaru_Read_Bytes_Parms), &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::NewProp_Out_PDF,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::NewProp_In_Bytes,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::NewProp_ReturnValue,
 	};
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::Function_MetaDataParams[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::Function_MetaDataParams[] = {
 		{ "Category", "LibHaru|Write" },
-		{ "DisplayName", "LibHaru - Save as Bytes" },
+		{ "DisplayName", "LibHaru - Read From Bytes" },
+		{ "Keywords", "libharu, pdf, doc, document, read, byte, bytes" },
+		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
+		{ "ToolTip", "" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UUE_LibHaruBPLibrary, nullptr, "LibHaru_Read_Bytes", nullptr, nullptr, sizeof(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::UE_LibHaruBPLibrary_eventLibHaru_Read_Bytes_Parms), Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics
+	{
+		struct UE_LibHaruBPLibrary_eventLibHaru_Save_Bytes_Parms
+		{
+			ULibHaruDoc* In_PDF;
+			UBytesObject_64* Out_Bytes;
+			bool ReturnValue;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_In_PDF;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Out_Bytes;
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::NewProp_In_PDF = { "In_PDF", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Save_Bytes_Parms, In_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::NewProp_Out_Bytes = { "Out_Bytes", nullptr, (EPropertyFlags)0x0010000000000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Save_Bytes_Parms, Out_Bytes), Z_Construct_UClass_UBytesObject_64_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((UE_LibHaruBPLibrary_eventLibHaru_Save_Bytes_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UE_LibHaruBPLibrary_eventLibHaru_Save_Bytes_Parms), &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::NewProp_In_PDF,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::NewProp_Out_Bytes,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::Function_MetaDataParams[] = {
+		{ "Category", "LibHaru|Write" },
+		{ "DisplayName", "LibHaru - Save Bytes" },
 		{ "Keywords", "libharu, pdf, doc, document, save, as, bytes" },
 		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
 		{ "ToolTip", "" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UUE_LibHaruBPLibrary, nullptr, "LibHaru_Save_As_Bytes", nullptr, nullptr, sizeof(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::UE_LibHaruBPLibrary_eventLibHaru_Save_As_Bytes_Parms), Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::Function_MetaDataParams)) };
-	UFunction* Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes()
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UUE_LibHaruBPLibrary, nullptr, "LibHaru_Save_Bytes", nullptr, nullptr, sizeof(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::UE_LibHaruBPLibrary_eventLibHaru_Save_Bytes_Parms), Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes()
 	{
 		static UFunction* ReturnFunction = nullptr;
 		if (!ReturnFunction)
 		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes_Statics::FuncParams);
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
-	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics
+	struct Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics
 	{
-		struct UE_LibHaruBPLibrary_eventLibHaru_Save_PDF_Parms
+		struct UE_LibHaruBPLibrary_eventLibHaru_Save_File_Parms
 		{
 			ULibHaruDoc* In_PDF;
 			FString Export_Path;
@@ -1281,34 +1338,34 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::NewProp_In_PDF = { "In_PDF", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Save_PDF_Parms, In_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::NewProp_Export_Path = { "Export_Path", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Save_PDF_Parms, Export_Path), METADATA_PARAMS(nullptr, 0) };
-	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::NewProp_In_PDF = { "In_PDF", nullptr, (EPropertyFlags)0x0010000008000180, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Save_File_Parms, In_PDF), Z_Construct_UClass_ULibHaruDoc_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::NewProp_Export_Path = { "Export_Path", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(UE_LibHaruBPLibrary_eventLibHaru_Save_File_Parms, Export_Path), METADATA_PARAMS(nullptr, 0) };
+	void Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::NewProp_ReturnValue_SetBit(void* Obj)
 	{
-		((UE_LibHaruBPLibrary_eventLibHaru_Save_PDF_Parms*)Obj)->ReturnValue = 1;
+		((UE_LibHaruBPLibrary_eventLibHaru_Save_File_Parms*)Obj)->ReturnValue = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UE_LibHaruBPLibrary_eventLibHaru_Save_PDF_Parms), &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::NewProp_In_PDF,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::NewProp_Export_Path,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::NewProp_ReturnValue,
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UE_LibHaruBPLibrary_eventLibHaru_Save_File_Parms), &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::NewProp_In_PDF,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::NewProp_Export_Path,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::NewProp_ReturnValue,
 	};
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::Function_MetaDataParams[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::Function_MetaDataParams[] = {
 		{ "Category", "LibHaru|Write" },
-		{ "DisplayName", "LibHaru - Save PDF" },
+		{ "DisplayName", "LibHaru - Save File" },
 		{ "Keywords", "libharu, pdf, doc, document, save" },
 		{ "ModuleRelativePath", "Public/UE_LibHaruBPLibrary.h" },
 		{ "ToolTip", "" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UUE_LibHaruBPLibrary, nullptr, "LibHaru_Save_PDF", nullptr, nullptr, sizeof(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::UE_LibHaruBPLibrary_eventLibHaru_Save_PDF_Parms), Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::Function_MetaDataParams)) };
-	UFunction* Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF()
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UUE_LibHaruBPLibrary, nullptr, "LibHaru_Save_File", nullptr, nullptr, sizeof(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::UE_LibHaruBPLibrary_eventLibHaru_Save_File_Parms), Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File()
 	{
 		static UFunction* ReturnFunction = nullptr;
 		if (!ReturnFunction)
 		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF_Statics::FuncParams);
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -1345,8 +1402,9 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Create_Doc, "LibHaru_Create_Doc" }, // 2970100166
 		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_External, "LibHaru_Load_Font_External" }, // 1819640416
 		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Load_Font_Standart, "LibHaru_Load_Font_Standart" }, // 2922984530
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_As_Bytes, "LibHaru_Save_As_Bytes" }, // 2052218325
-		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_PDF, "LibHaru_Save_PDF" }, // 569840682
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Read_Bytes, "LibHaru_Read_Bytes" }, // 234730398
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_Bytes, "LibHaru_Save_Bytes" }, // 1702349716
+		{ &Z_Construct_UFunction_UUE_LibHaruBPLibrary_LibHaru_Save_File, "LibHaru_Save_File" }, // 835743746
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UUE_LibHaruBPLibrary_Statics::Class_MetaDataParams[] = {
@@ -1393,9 +1451,9 @@ void EmptyLinkFunctionForGeneratedCodeUE_LibHaruBPLibrary() {}
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_Statics::ClassInfo[] = {
 		{ Z_Construct_UClass_ULibHaruDoc, ULibHaruDoc::StaticClass, TEXT("ULibHaruDoc"), &Z_Registration_Info_UClass_ULibHaruDoc, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULibHaruDoc), 1435911744U) },
 		{ Z_Construct_UClass_ULibHaruFont, ULibHaruFont::StaticClass, TEXT("ULibHaruFont"), &Z_Registration_Info_UClass_ULibHaruFont, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ULibHaruFont), 2676193705U) },
-		{ Z_Construct_UClass_UUE_LibHaruBPLibrary, UUE_LibHaruBPLibrary::StaticClass, TEXT("UUE_LibHaruBPLibrary"), &Z_Registration_Info_UClass_UUE_LibHaruBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UUE_LibHaruBPLibrary), 3499804698U) },
+		{ Z_Construct_UClass_UUE_LibHaruBPLibrary, UUE_LibHaruBPLibrary::StaticClass, TEXT("UUE_LibHaruBPLibrary"), &Z_Registration_Info_UClass_UUE_LibHaruBPLibrary, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UUE_LibHaruBPLibrary), 2816936162U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_3230090836(TEXT("/Script/UE_LibHaru"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_255714226(TEXT("/Script/UE_LibHaru"),
 		Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Projects_FROZEN_SDKs_FF_Plugins_Mobile_Plugins_UE_LibHaru_Source_UE_LibHaru_Public_UE_LibHaruBPLibrary_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

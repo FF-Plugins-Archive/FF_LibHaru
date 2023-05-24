@@ -34,6 +34,39 @@ bool UUE_LibHaruBPLibrary::LibHaru_Create_Doc(ULibHaruDoc*& Out_PDF)
 	return true;
 }
 
+bool UUE_LibHaruBPLibrary::LibHaru_Read_Bytes(ULibHaruDoc*& Out_PDF, UBytesObject_64* In_Bytes)
+{
+	if (IsValid(In_Bytes) == false)
+	{
+		return false;
+	}
+
+	if (In_Bytes->ByteArray.Num() == 0)
+	{
+		return false;
+	}
+
+	HPDF_Doc PDF_Document = HPDF_New(NULL, NULL);
+
+	HPDF_UINT32 Size = In_Bytes->ByteArray.GetAllocatedSize();
+	HPDF_BYTE* Buffer = (unsigned char*)malloc(In_Bytes->ByteArray.GetAllocatedSize());
+	FMemory::Memcpy(Buffer, In_Bytes->ByteArray.GetData(), In_Bytes->ByteArray.GetAllocatedSize());
+
+	HPDF_ReadFromStream(PDF_Document, Buffer, &Size);
+
+	HPDF_SetCompressionMode(PDF_Document, HPDF_COMP_NONE);
+	HPDF_SetPageMode(PDF_Document, HPDF_PAGE_MODE_USE_OUTLINE);
+	HPDF_UseUTFEncodings(PDF_Document);
+	HPDF_SetCurrentEncoder(PDF_Document, "UTF-8");
+
+	ULibHaruDoc* LibHaru_Object = NewObject<ULibHaruDoc>();
+	LibHaru_Object->Document = PDF_Document;
+
+	Out_PDF = LibHaru_Object;
+
+	return true;
+}
+
 bool UUE_LibHaruBPLibrary::LibHaru_Add_Pages(UPARAM(ref)ULibHaruDoc*& In_PDF, TArray<FVector2D> Pages, bool bInsertInstead, int32 InsertAfter)
 {
 	if (IsValid(In_PDF) == false)
@@ -634,7 +667,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Ellipse(UPARAM(ref)ULibHaruDoc*& In_PDF, 
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Save_PDF(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Export_Path)
+bool UUE_LibHaruBPLibrary::LibHaru_Save_File(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Export_Path)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -656,7 +689,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Save_PDF(UPARAM(ref)ULibHaruDoc*& In_PDF, FSt
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Save_As_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF, TArray<uint8>& Export_Bytes)
+bool UUE_LibHaruBPLibrary::LibHaru_Save_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF, UBytesObject_64*& Out_Bytes)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -669,15 +702,25 @@ bool UUE_LibHaruBPLibrary::LibHaru_Save_As_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF
 	}
 	
 	HPDF_STATUS Stream_Status = HPDF_SaveToStream(In_PDF->Document);
+	
+	// 0 is true for LibHaru.
+	if (Stream_Status != 0)
+	{
+		return false;
+	}
+
 	HPDF_UINT32 Buffer_Size = HPDF_GetStreamSize(In_PDF->Document);
 	HPDF_BYTE* Buffer = (unsigned char*)malloc(Buffer_Size);
 	HPDF_ReadFromStream(In_PDF->Document, Buffer, &Buffer_Size);
 	
-	TArray<uint8> Array_Bytes;
+	TArray64<uint8> Array_Bytes;
 	Array_Bytes.SetNum(Buffer_Size);
 	FMemory::Memcpy(Array_Bytes.GetData(), Buffer, Buffer_Size);
 
-	Export_Bytes = Array_Bytes;
+	UBytesObject_64* BytesObject = NewObject<UBytesObject_64>();
+	BytesObject->ByteArray = Array_Bytes;
+
+	Out_Bytes = BytesObject;
 	
 	return true;
 }

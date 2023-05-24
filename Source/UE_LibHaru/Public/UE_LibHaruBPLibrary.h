@@ -13,7 +13,7 @@ THIRD_PARTY_INCLUDES_START
 #include "hpdf.h"
 THIRD_PARTY_INCLUDES_END
 
-#include "Extended_Enums.h"
+#include "ExtendedVarsBPLibrary.h"
 
 #include "UE_LibHaruBPLibrary.generated.h"
 
@@ -48,6 +48,9 @@ class UUE_LibHaruBPLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Create Document", ToolTip = "", Keywords = "libharu, pdf, create, doc, document"), Category = "LibHaru|Write")
 	static bool LibHaru_Create_Doc(ULibHaruDoc*& Out_PDF);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Read From Bytes", ToolTip = "", Keywords = "libharu, pdf, doc, document, read, byte, bytes"), Category = "LibHaru|Write")
+	static bool LibHaru_Read_Bytes(ULibHaruDoc*& Out_PDF, UBytesObject_64* In_Bytes);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Pages", ToolTip = "", Keywords = "libharu, pdf, add, doc, document, page, pages"), Category = "LibHaru|Write")
 	static bool LibHaru_Add_Pages(UPARAM(ref)ULibHaruDoc*& In_PDF, TArray<FVector2D> Pages, bool bInsertInstead, int32 InsertAfter);
@@ -85,11 +88,11 @@ class UUE_LibHaruBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Ellipse", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, ellipse, ellipses"), Category = "LibHaru|Write")
 	static bool LibHaru_Add_Ellipse(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Radii, int32 Width = 1, FLinearColor Line_Color = FLinearColor::Black, int32 Page_Index = 0);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Save PDF", ToolTip = "", Keywords = "libharu, pdf, doc, document, save"), Category = "LibHaru|Write")
-	static bool LibHaru_Save_PDF(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Export_Path);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Save File", ToolTip = "", Keywords = "libharu, pdf, doc, document, save"), Category = "LibHaru|Write")
+	static bool LibHaru_Save_File(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Export_Path);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Save as Bytes", ToolTip = "", Keywords = "libharu, pdf, doc, document, save, as, bytes"), Category = "LibHaru|Write")
-	static bool LibHaru_Save_As_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF, TArray<uint8>& Export_Bytes);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Save Bytes", ToolTip = "", Keywords = "libharu, pdf, doc, document, save, as, bytes"), Category = "LibHaru|Write")
+	static bool LibHaru_Save_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF, UBytesObject_64*& Out_Bytes);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Close Document", ToolTip = "", Keywords = "libharu, pdf, doc, document, close"), Category = "LibHaru|System")
 	static bool LibHaru_Close_Document(UPARAM(ref)ULibHaruDoc*& In_PDF);
