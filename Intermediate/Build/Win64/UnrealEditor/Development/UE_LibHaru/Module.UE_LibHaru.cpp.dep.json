@@ -37,7 +37,8 @@
             "e:\\epic\\projects\\frozen\\sdks\\ff_plugins_mobile\\plugins\\ue_libharu\\source\\ue_libharu\\public\\ue_libharu.h",
             "e:\\epic\\projects\\frozen\\sdks\\ff_plugins_mobile\\plugins\\ue_libharu\\source\\ue_libharu\\private\\ue_libharubplibrary.cpp",
             "e:\\epic\\engines\\ue_5.1\\engine\\source\\runtime\\engine\\classes\\kismet\\kismetstringlibrary.h",
-            "e:\\epic\\engines\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\kismetstringlibrary.generated.h"
+            "e:\\epic\\engines\\ue_5.1\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\kismetstringlibrary.generated.h",
+            "e:\\epic\\projects\\frozen\\sdks\\ff_plugins_mobile\\plugins\\ue_libharu\\source\\ue_libharu\\thirdparty\\libharu\\windows\\include\\hpdf_u3d.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

@@ -195,10 +195,12 @@ static inline void FDelegateLibharu_DelegateWrapper(const FScriptDelegate& Deleg
 	DECLARE_FUNCTION(execLibHaru_Close_Document); \
 	DECLARE_FUNCTION(execLibHaru_Save_As_Bytes); \
 	DECLARE_FUNCTION(execLibHaru_Save_PDF); \
+	DECLARE_FUNCTION(execLibHaru_Add_Ellipse); \
 	DECLARE_FUNCTION(execLibHaru_Add_Circle); \
 	DECLARE_FUNCTION(execLibHaru_Add_Arc); \
 	DECLARE_FUNCTION(execLibHaru_Add_Rectangle); \
 	DECLARE_FUNCTION(execLibHaru_Add_Line); \
+	DECLARE_FUNCTION(execLibHaru_Add_U3D); \
 	DECLARE_FUNCTION(execLibHaru_Add_Image); \
 	DECLARE_FUNCTION(execLibHaru_Add_Texts); \
 	DECLARE_FUNCTION(execLibHaru_Load_Font_External); \
@@ -212,10 +214,12 @@ static inline void FDelegateLibharu_DelegateWrapper(const FScriptDelegate& Deleg
 	DECLARE_FUNCTION(execLibHaru_Close_Document); \
 	DECLARE_FUNCTION(execLibHaru_Save_As_Bytes); \
 	DECLARE_FUNCTION(execLibHaru_Save_PDF); \
+	DECLARE_FUNCTION(execLibHaru_Add_Ellipse); \
 	DECLARE_FUNCTION(execLibHaru_Add_Circle); \
 	DECLARE_FUNCTION(execLibHaru_Add_Arc); \
 	DECLARE_FUNCTION(execLibHaru_Add_Rectangle); \
 	DECLARE_FUNCTION(execLibHaru_Add_Line); \
+	DECLARE_FUNCTION(execLibHaru_Add_U3D); \
 	DECLARE_FUNCTION(execLibHaru_Add_Image); \
 	DECLARE_FUNCTION(execLibHaru_Add_Texts); \
 	DECLARE_FUNCTION(execLibHaru_Load_Font_External); \

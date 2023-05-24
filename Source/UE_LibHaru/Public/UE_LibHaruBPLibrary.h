@@ -67,6 +67,9 @@ class UUE_LibHaruBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Image", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, image, images"), Category = "LibHaru|Write")
 	static bool LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FVector2D Position, int32 Page_Index);
 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add U3D Model", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, 3d, model, models, u3d"), Category = "LibHaru|Write")
+	static bool LibHaru_Add_U3D(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Model_Path, FVector2D Position, FVector2D Size, int32 Zoom = 1000, FLinearColor BG_Color = FLinearColor::White, int32 Page_Index = 0);
+
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Line", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, line, lines"), Category = "LibHaru|Write")
 	static bool LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Start, FVector2D End, int32 Width = 1, FLinearColor Line_Color = FLinearColor::Black, int32 Page_Index = 0);
 
@@ -78,6 +81,9 @@ class UUE_LibHaruBPLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Circle", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, circle, circles"), Category = "LibHaru|Write")
 	static bool LibHaru_Add_Circle(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, double Radius, int32 Width = 1, FLinearColor Line_Color = FLinearColor::Black, int32 Page_Index = 0);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Ellipse", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, ellipse, ellipses"), Category = "LibHaru|Write")
+	static bool LibHaru_Add_Ellipse(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Radii, int32 Width = 1, FLinearColor Line_Color = FLinearColor::Black, int32 Page_Index = 0);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Save PDF", ToolTip = "", Keywords = "libharu, pdf, doc, document, save"), Category = "LibHaru|Write")
 	static bool LibHaru_Save_PDF(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Export_Path);

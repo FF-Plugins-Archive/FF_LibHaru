@@ -6,6 +6,11 @@
 // UE Includes.
 #include "Kismet/KismetStringLibrary.h"
 
+THIRD_PARTY_INCLUDES_START
+// LibHaru Includes
+#include "hpdf_u3d.h"
+THIRD_PARTY_INCLUDES_END
+
 UUE_LibHaruBPLibrary::UUE_LibHaruBPLibrary(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
 {
@@ -425,31 +430,14 @@ void UUE_LibHaruBPLibrary::LibHaru_Add_Texts(FDelegateLibharu DelegateAddObject,
 	);
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FVector2D Position, int32 Page_Index)
+HPDF_Image PDF_Image_Callback(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image)
 {
-	if (IsValid(In_PDF) == false)
-	{
-		return false;
-	}
-
-	if (!In_PDF->Document)
-	{
-		return false;
-	}
-
-	if (IsValid(Target_Image) == false)
-	{
-		return false;
-	}
-
-	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
-
 	int32 Texture_Width = Target_Image->GetSizeX();
 	int32 Texture_Height = Target_Image->GetSizeY();
 
 	FTexture2DMipMap& Texture_Mip = Target_Image->GetPlatformData()->Mips[0];
 	void* Texture_Data = Texture_Mip.BulkData.Lock(LOCK_READ_WRITE);
-	
+
 	TArray<FColor> Array_Colors;
 	Array_Colors.SetNum(Texture_Width * Texture_Height);
 
@@ -467,9 +455,75 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UT
 		Buffer[(Index_Colors * 3) + 1] = Array_Colors[Index_Colors].G;
 		Buffer[(Index_Colors * 3) + 2] = Array_Colors[Index_Colors].B;
 	}
-	
+
 	HPDF_Image PDF_Image = HPDF_LoadRawImageFromMem(In_PDF->Document, Buffer, Texture_Width, Texture_Height, HPDF_ColorSpace::HPDF_CS_DEVICE_RGB, 8);
-	HPDF_Page_DrawImage(Target_Page, PDF_Image, Position.X, Position.Y, Texture_Width, Texture_Height);
+
+	return PDF_Image;
+}
+
+bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FVector2D Position, int32 Page_Index)
+{
+	if (IsValid(In_PDF) == false)
+	{
+		return false;
+	}
+
+	if (!In_PDF->Document)
+	{
+		return false;
+	}
+
+	if (IsValid(Target_Image) == false)
+	{
+		return false;
+	}
+
+	HPDF_Image PDF_Image = PDF_Image_Callback(In_PDF, Target_Image);
+	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
+	HPDF_Page_DrawImage(Target_Page, PDF_Image, Position.X, Position.Y, Target_Image->GetSizeX(), Target_Image->GetSizeY());
+
+	return true;
+}
+
+bool UUE_LibHaruBPLibrary::LibHaru_Add_U3D(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Model_Path, FVector2D Position, FVector2D Size, int32 Zoom, FLinearColor BG_Color, int32 Page_Index)
+{
+	if (IsValid(In_PDF) == false)
+	{
+		return false;
+	}
+
+	if (!In_PDF->Document)
+	{
+		return false;
+	}
+
+	FPaths::MakeStandardFilename(Model_Path);
+	if (FPaths::FileExists(Model_Path) == false)
+	{
+		return false;
+	}
+
+	FPaths::MakePlatformFilename(Model_Path);
+
+	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
+
+	HPDF_U3D U3D_Model = HPDF_LoadU3DFromFile(In_PDF->Document, TCHAR_TO_UTF8(*Model_Path));
+	
+	HPDF_Rect U3D_Rectangle = { 0,0,0,0 };
+	U3D_Rectangle.top = Position.Y;
+	U3D_Rectangle.bottom = Position.Y - Size.Y;
+	U3D_Rectangle.left = Position.X;
+	U3D_Rectangle.right = Position.X + Size.X;
+	
+	HPDF_Annotation U3D_Annot = HPDF_Page_Create3DAnnot(Target_Page, U3D_Rectangle, HPDF_TRUE, HPDF_FALSE, U3D_Model, NULL);
+	HPDF_Dict DefaultView = HPDF_Page_Create3DView(Target_Page, U3D_Model, U3D_Annot, "DefaultView");
+	
+	HPDF_3DView_SetCamera(DefaultView, 0, 0, 0, 0, 0, 1, 3, 0);
+	HPDF_3DView_SetOrthogonalProjection(DefaultView, Zoom);
+	
+	HPDF_3DView_SetBackgroundColor(DefaultView, BG_Color.R, BG_Color.G, BG_Color.B);
+	HPDF_U3D_Add3DView(U3D_Model, DefaultView);
+	HPDF_U3D_SetDefault3DView(U3D_Model, "DefaultView");
 
 	return true;
 }
@@ -554,6 +608,27 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Circle(UPARAM(ref)ULibHaruDoc*& In_PDF, F
 	HPDF_Page_SetLineWidth(Target_Page, Width);
 	HPDF_Page_SetRGBStroke(Target_Page, Line_Color.R, Line_Color.G, Line_Color.B);
 	HPDF_Page_Circle(Target_Page, Location.X, Location.Y, Radius);
+	HPDF_Page_Stroke(Target_Page);
+
+	return true;
+}
+
+bool UUE_LibHaruBPLibrary::LibHaru_Add_Ellipse(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Radii, int32 Width, FLinearColor Line_Color, int32 Page_Index)
+{
+	if (IsValid(In_PDF) == false)
+	{
+		return false;
+	}
+
+	if (!In_PDF->Document)
+	{
+		return false;
+	}
+
+	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
+	HPDF_Page_SetLineWidth(Target_Page, Width);
+	HPDF_Page_SetRGBStroke(Target_Page, Line_Color.R, Line_Color.G, Line_Color.B);
+	HPDF_Page_Ellipse(Target_Page, Location.X, Location.Y, Radii.X, Radii.Y);
 	HPDF_Page_Stroke(Target_Page);
 
 	return true;
