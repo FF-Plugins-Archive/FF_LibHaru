@@ -49,9 +49,6 @@ class UUE_LibHaruBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Create Document", ToolTip = "", Keywords = "libharu, pdf, create, doc, document"), Category = "LibHaru|Write")
 	static bool LibHaru_Create_Doc(ULibHaruDoc*& Out_PDF);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Read From Bytes", ToolTip = "", Keywords = "libharu, pdf, doc, document, read, byte, bytes"), Category = "LibHaru|Write")
-	static bool LibHaru_Read_Bytes(ULibHaruDoc*& Out_PDF, UBytesObject_64* In_Bytes);
-
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Pages", ToolTip = "", Keywords = "libharu, pdf, add, doc, document, page, pages"), Category = "LibHaru|Write")
 	static bool LibHaru_Add_Pages(UPARAM(ref)ULibHaruDoc*& In_PDF, TArray<FVector2D> Pages, bool bInsertInstead, int32 InsertAfter);
 
@@ -96,4 +93,5 @@ class UUE_LibHaruBPLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Close Document", ToolTip = "", Keywords = "libharu, pdf, doc, document, close"), Category = "LibHaru|System")
 	static bool LibHaru_Close_Document(UPARAM(ref)ULibHaruDoc*& In_PDF);
+
 };

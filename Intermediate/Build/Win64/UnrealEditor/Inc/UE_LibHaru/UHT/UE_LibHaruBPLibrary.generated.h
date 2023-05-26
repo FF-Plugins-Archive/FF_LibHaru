@@ -207,7 +207,6 @@ static inline void FDelegateLibharu_DelegateWrapper(const FScriptDelegate& Deleg
 	DECLARE_FUNCTION(execLibHaru_Load_Font_External); \
 	DECLARE_FUNCTION(execLibHaru_Load_Font_Standart); \
 	DECLARE_FUNCTION(execLibHaru_Add_Pages); \
-	DECLARE_FUNCTION(execLibHaru_Read_Bytes); \
 	DECLARE_FUNCTION(execLibHaru_Create_Doc);
 
 
@@ -227,7 +226,6 @@ static inline void FDelegateLibharu_DelegateWrapper(const FScriptDelegate& Deleg
 	DECLARE_FUNCTION(execLibHaru_Load_Font_External); \
 	DECLARE_FUNCTION(execLibHaru_Load_Font_Standart); \
 	DECLARE_FUNCTION(execLibHaru_Add_Pages); \
-	DECLARE_FUNCTION(execLibHaru_Read_Bytes); \
 	DECLARE_FUNCTION(execLibHaru_Create_Doc);
 
 

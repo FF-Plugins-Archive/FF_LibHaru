@@ -20,6 +20,7 @@ UUE_LibHaruBPLibrary::UUE_LibHaruBPLibrary(const FObjectInitializer& ObjectIniti
 bool UUE_LibHaruBPLibrary::LibHaru_Create_Doc(ULibHaruDoc*& Out_PDF)
 {
 	HPDF_Doc PDF_Document = HPDF_New(NULL, NULL);
+	PDF_Document->pdf_version = HPDF_VER_17;
 	
 	HPDF_SetCompressionMode(PDF_Document, HPDF_COMP_NONE);
 	HPDF_SetPageMode(PDF_Document, HPDF_PAGE_MODE_USE_OUTLINE);
@@ -29,39 +30,6 @@ bool UUE_LibHaruBPLibrary::LibHaru_Create_Doc(ULibHaruDoc*& Out_PDF)
 	ULibHaruDoc* LibHaru_Object = NewObject<ULibHaruDoc>();
 	LibHaru_Object->Document = PDF_Document;
 	
-	Out_PDF = LibHaru_Object;
-
-	return true;
-}
-
-bool UUE_LibHaruBPLibrary::LibHaru_Read_Bytes(ULibHaruDoc*& Out_PDF, UBytesObject_64* In_Bytes)
-{
-	if (IsValid(In_Bytes) == false)
-	{
-		return false;
-	}
-
-	if (In_Bytes->ByteArray.Num() == 0)
-	{
-		return false;
-	}
-
-	HPDF_Doc PDF_Document = HPDF_New(NULL, NULL);
-
-	HPDF_UINT32 Size = In_Bytes->ByteArray.GetAllocatedSize();
-	HPDF_BYTE* Buffer = (unsigned char*)malloc(In_Bytes->ByteArray.GetAllocatedSize());
-	FMemory::Memcpy(Buffer, In_Bytes->ByteArray.GetData(), In_Bytes->ByteArray.GetAllocatedSize());
-
-	HPDF_ReadFromStream(PDF_Document, Buffer, &Size);
-
-	HPDF_SetCompressionMode(PDF_Document, HPDF_COMP_NONE);
-	HPDF_SetPageMode(PDF_Document, HPDF_PAGE_MODE_USE_OUTLINE);
-	HPDF_UseUTFEncodings(PDF_Document);
-	HPDF_SetCurrentEncoder(PDF_Document, "UTF-8");
-
-	ULibHaruDoc* LibHaru_Object = NewObject<ULibHaruDoc>();
-	LibHaru_Object->Document = PDF_Document;
-
 	Out_PDF = LibHaru_Object;
 
 	return true;
