@@ -1804,10 +1804,17 @@ E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Intermediate/B
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_ext_gstate.h \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_outline.h \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_pdfa.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/ExtendedVars/Source/ExtendedVars/Public/ExtendedVarsBPLibrary.h \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/ExtendedVars/Source/ExtendedVars/Public/Extended_Enums.h \
+  E:/Epic/Engines/UE_5.1/Engine/Source/Runtime/Engine/Classes/Engine/FontFace.h \
+  E:/Epic/Engines/UE_5.1/Engine/Source/Runtime/SlateCore/Public/Fonts/FontFaceInterface.h \
+  E:/Epic/Engines/UE_5.1/Engine/Intermediate/Build/Android/UnrealGame/Inc/SlateCore/UHT/FontFaceInterface.generated.h \
+  E:/Epic/Engines/UE_5.1/Engine/Intermediate/Build/Android/UnrealGame/Inc/Engine/UHT/FontFace.generated.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/ExtendedVars/Intermediate/Build/Android/UnrealGame/Inc/ExtendedVars/UHT/ExtendedVarsBPLibrary.generated.h \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Intermediate/Build/Android/UnrealGame/Inc/UE_LibHaru/UHT/UE_LibHaruBPLibrary.generated.h \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/Private/UE_LibHaru.cpp \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/Public/UE_LibHaru.h \
   E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/Private/UE_LibHaruBPLibrary.cpp \
   E:/Epic/Engines/UE_5.1/Engine/Source/Runtime/Engine/Classes/Kismet/KismetStringLibrary.h \
-  E:/Epic/Engines/UE_5.1/Engine/Intermediate/Build/Android/UnrealGame/Inc/Engine/UHT/KismetStringLibrary.generated.h
+  E:/Epic/Engines/UE_5.1/Engine/Intermediate/Build/Android/UnrealGame/Inc/Engine/UHT/KismetStringLibrary.generated.h \
+  E:/Epic/Projects/FROZEN/SDKs/FF_Plugins_Mobile/Plugins/UE_LibHaru/Source/UE_LibHaru/ThirdParty/libharu/Android/include/hpdf_u3d.h
