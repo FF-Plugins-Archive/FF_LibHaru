@@ -5,6 +5,8 @@
 
 // UE Includes.
 #include "Kismet/KismetStringLibrary.h"
+#include "ImageUtils.h"
+#include "Engine/TextureRenderTarget2D.h"
 
 THIRD_PARTY_INCLUDES_START
 // LibHaru Includes
@@ -431,30 +433,38 @@ void UUE_LibHaruBPLibrary::LibHaru_Add_Texts(FDelegateLibharu DelegateAddObject,
 	);
 }
 
-HPDF_Image PDF_Image_Callback(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image)
+HPDF_Image PDF_Image_Callback(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FColor TransparentColor)
 {
 	int32 Texture_Width = Target_Image->GetSizeX();
 	int32 Texture_Height = Target_Image->GetSizeY();
 
-	FTexture2DMipMap& Texture_Mip = Target_Image->GetPlatformData()->Mips[0];
-	void* Texture_Data = Texture_Mip.BulkData.Lock(LOCK_READ_WRITE);
+	FImage Image;
+	FImageUtils::GetTexture2DSourceImage(Target_Image, Image);
+	TArray64<uint8> RawData = Image.RawData;
 
 	TArray<FColor> Array_Colors;
 	Array_Colors.SetNum(Texture_Width * Texture_Height);
 
-	// Texture data is BGRA formatted. So, we need to multiply with 4 for each color.
-	FMemory::Memcpy(Array_Colors.GetData(), static_cast<FColor*>(Texture_Data), static_cast<SIZE_T>(Array_Colors.Num()) * 4);
-
-	Texture_Mip.BulkData.Unlock();
-	Target_Image->UpdateResource();
+	FMemory::Memcpy(Array_Colors.GetData(), RawData.GetData(), static_cast<SIZE_T>(RawData.Num()));
 
 	// Libharu uses RGB formatted textures. So, we need to multiply with 3 for each color and copy values with a customized order.
-	HPDF_BYTE* Buffer = (unsigned char*)malloc(static_cast<size_t>(Array_Colors.Num()) * 3);
+	HPDF_BYTE* Buffer = (unsigned char*)malloc(static_cast<size_t>(Array_Colors.Num()) * 4);
+	
 	for (int32 Index_Colors = 0; Index_Colors < Array_Colors.Num(); Index_Colors++)
 	{
-		Buffer[Index_Colors * 3] = Array_Colors[Index_Colors].R;
-		Buffer[(Index_Colors * 3) + 1] = Array_Colors[Index_Colors].G;
-		Buffer[(Index_Colors * 3) + 2] = Array_Colors[Index_Colors].B;
+		if (Array_Colors[Index_Colors].A == 0)
+		{
+			Buffer[Index_Colors * 3] = TransparentColor.R;
+			Buffer[(Index_Colors * 3) + 1] = TransparentColor.G;
+			Buffer[(Index_Colors * 3) + 2] = TransparentColor.B;
+		}
+
+		else
+		{
+			Buffer[Index_Colors * 3] = Array_Colors[Index_Colors].R;
+			Buffer[(Index_Colors * 3) + 1] = Array_Colors[Index_Colors].G;
+			Buffer[(Index_Colors * 3) + 2] = Array_Colors[Index_Colors].B;
+		}
 	}
 
 	HPDF_Image PDF_Image = HPDF_LoadRawImageFromMem(In_PDF->Document, Buffer, Texture_Width, Texture_Height, HPDF_ColorSpace::HPDF_CS_DEVICE_RGB, 8);
@@ -462,7 +472,7 @@ HPDF_Image PDF_Image_Callback(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Targe
 	return PDF_Image;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FVector2D Position, int32 Page_Index)
+bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FColor TransparentColor, FVector2D Position, int32 Page_Index)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -479,7 +489,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UT
 		return false;
 	}
 
-	HPDF_Image PDF_Image = PDF_Image_Callback(In_PDF, Target_Image);
+	HPDF_Image PDF_Image = PDF_Image_Callback(In_PDF, Target_Image, TransparentColor);
 	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
 	HPDF_Page_DrawImage(Target_Page, PDF_Image, Position.X, Position.Y, Target_Image->GetSizeX(), Target_Image->GetSizeY());
 

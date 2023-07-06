@@ -65,7 +65,7 @@ class UUE_LibHaruBPLibrary : public UBlueprintFunctionLibrary
 	static void LibHaru_Add_Texts(FDelegateLibharu DelegateAddObject, UPARAM(ref)ULibHaruDoc*& In_PDF, UPARAM(ref)ULibHaruFont*& In_Font, FString In_Texts, FLinearColor Text_Color = FLinearColor::Black, FVector2D Position = FVector2D(0.0f, 0.0f), FVector2D Size = FVector2D(1.0f, 1.0f), FVector2D Rotation = FVector2D(0.0f, 0.0f), FVector2D Border = FVector2D(10.0f, 10.0f), int32 FontSize = 12, int32 PageIndex = 0);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Image", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, image, images"), Category = "LibHaru|Write")
-	static bool LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FVector2D Position, int32 Page_Index);
+	static bool LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FColor TransparentColor, FVector2D Position, int32 Page_Index);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add U3D Model", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, 3d, model, models, u3d"), Category = "LibHaru|Write")
 	static bool LibHaru_Add_U3D(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Model_Path, FVector2D Position, FVector2D Size, int32 Zoom = 1000, FLinearColor BG_Color = FLinearColor::White, int32 Page_Index = 0);
