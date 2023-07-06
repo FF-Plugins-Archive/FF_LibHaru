@@ -444,7 +444,6 @@ HPDF_Image PDF_Image_Callback(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Targe
 
 	TArray<FColor> Array_Colors;
 	Array_Colors.SetNum(Texture_Width * Texture_Height);
-
 	FMemory::Memcpy(Array_Colors.GetData(), RawData.GetData(), static_cast<SIZE_T>(RawData.Num()));
 
 	// Libharu uses RGB formatted textures. So, we need to multiply with 3 for each color and copy values with a customized order.
