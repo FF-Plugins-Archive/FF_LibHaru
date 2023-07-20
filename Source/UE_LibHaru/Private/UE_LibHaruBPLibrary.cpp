@@ -499,9 +499,17 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UT
 
 	HPDF_Image PDF_Image = PDF_Image_Callback(In_PDF, Target_Image, TransparentColor);
 	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
-	HPDF_Page_DrawImage(Target_Page, PDF_Image, Position.X, Position.Y, Target_Image->GetSizeX(), Target_Image->GetSizeY());
+	HPDF_STATUS Result = HPDF_Page_DrawImage(Target_Page, PDF_Image, Position.X, Position.Y, Target_Image->GetSizeX(), Target_Image->GetSizeY());
 
-	return true;
+	if (Result == 0)
+	{
+		return true;
+	}
+
+	else
+	{
+		return false;
+	}
 }
 
 bool UUE_LibHaruBPLibrary::LibHaru_Add_U3D(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Model_Path, FVector2D Position, FVector2D Size, int32 Zoom, FLinearColor BG_Color, int32 Page_Index)
@@ -541,10 +549,24 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_U3D(UPARAM(ref)ULibHaruDoc*& In_PDF, FStr
 	HPDF_3DView_SetOrthogonalProjection(DefaultView, Zoom);
 	
 	HPDF_3DView_SetBackgroundColor(DefaultView, BG_Color.R, BG_Color.G, BG_Color.B);
-	HPDF_U3D_Add3DView(U3D_Model, DefaultView);
-	HPDF_U3D_SetDefault3DView(U3D_Model, "DefaultView");
+	HPDF_STATUS Result = HPDF_U3D_Add3DView(U3D_Model, DefaultView);
 
-	return true;
+	if (Result != 0)
+	{
+		return false;
+	}
+
+	Result = HPDF_U3D_SetDefault3DView(U3D_Model, "DefaultView");
+
+	if (Result == 0)
+	{
+		return true;
+	}
+
+	else
+	{
+		return false;
+	}
 }
 
 bool UUE_LibHaruBPLibrary::LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Start, FVector2D End, int32 Width, FLinearColor Line_Color, int32 Page_Index)
