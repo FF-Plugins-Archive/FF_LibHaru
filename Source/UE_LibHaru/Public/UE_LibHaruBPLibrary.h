@@ -85,8 +85,8 @@ class UUE_LibHaruBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Add Ellipse", ToolTip = "", Keywords = "libharu, pdf, add, draw, doc, document, ellipse, ellipses"), Category = "LibHaru|Write")
 	static bool LibHaru_Add_Ellipse(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Radii, int32 Width = 1, FLinearColor Line_Color = FLinearColor::Black, int32 Page_Index = 0);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Save File", ToolTip = "", Keywords = "libharu, pdf, doc, document, save"), Category = "LibHaru|Write")
-	static bool LibHaru_Save_File(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Export_Path);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Save File", ToolTip = "You can find list of error codes in here. https://github.com/libharu/libharu/wiki/Error-handling", Keywords = "libharu, pdf, doc, document, save"), Category = "LibHaru|Write")
+	static bool LibHaru_Save_File(UPARAM(ref)ULibHaruDoc*& In_PDF, FString& OutCode, FString Export_Path);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "LibHaru - Save Bytes", ToolTip = "", Keywords = "libharu, pdf, doc, document, save, as, bytes"), Category = "LibHaru|Write")
 	static bool LibHaru_Save_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF, UBytesObject_64*& Out_Bytes);

@@ -9,9 +9,20 @@
 #include "Engine/TextureRenderTarget2D.h"
 
 THIRD_PARTY_INCLUDES_START
+#include <iostream>
+#include <sstream>
 // LibHaru Includes
 #include "hpdf_u3d.h"
 THIRD_PARTY_INCLUDES_END
+
+FString Dec_To_Hex(HPDF_STATUS Result)
+{
+	std::stringstream ss;
+	ss << std::hex << Result;
+	std::string String(ss.str());
+
+	return String.c_str();
+}
 
 UUE_LibHaruBPLibrary::UUE_LibHaruBPLibrary(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
@@ -642,7 +653,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Ellipse(UPARAM(ref)ULibHaruDoc*& In_PDF, 
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Save_File(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Export_Path)
+bool UUE_LibHaruBPLibrary::LibHaru_Save_File(UPARAM(ref)ULibHaruDoc*& In_PDF, FString& OutCode, FString Export_Path)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -659,9 +670,18 @@ bool UUE_LibHaruBPLibrary::LibHaru_Save_File(UPARAM(ref)ULibHaruDoc*& In_PDF, FS
 		return false;
 	}
 
-	HPDF_SaveToFile(In_PDF->Document, TCHAR_TO_UTF8(*Export_Path));
+	HPDF_STATUS Result = HPDF_SaveToFile(In_PDF->Document, TCHAR_TO_UTF8(*Export_Path));
+	OutCode = Dec_To_Hex(Result);
 
-	return true;
+	if (Result == 0)
+	{
+		return true;
+	}
+
+	else
+	{
+		return false;
+	}
 }
 
 bool UUE_LibHaruBPLibrary::LibHaru_Save_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF, UBytesObject_64*& Out_Bytes)
