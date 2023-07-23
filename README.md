@@ -9,6 +9,7 @@ https://github.com/FF-Projects-UE/ExtendedVars
 
 # TARGET PLATFORM
 * It currently only works on Windows platform.
+* It supports only <b>latest editor versions</b>.
 
 # LIBHARU WRITE FUNCTIONS
 * <b>LibHaru - Create Document</b>: It creates a LibHaru based PDF file. It's object is different than PDFium's. So, you can't merge them unless export it and then re-import it, first.
@@ -38,6 +39,3 @@ https://github.com/FF-Projects-UE/ExtendedVars
 * <b>LibHaru - Save as Bytes</b>: It saves PDF as bytes array (TArray<uint8>). So, you can render it with PDFium without writing and reading a PDF file.
 
 * <b>LibHaru - Close Document</b> 
-
-# ROADMAP
-* Mobile Support
