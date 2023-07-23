@@ -6,7 +6,6 @@
 // UE Includes.
 #include "ImageUtils.h"
 #include "Kismet/KismetStringLibrary.h"
-#include "Kismet/KismetRenderingLibrary.h"
 #include "Engine/TextureRenderTarget2D.h"
 
 THIRD_PARTY_INCLUDES_START
