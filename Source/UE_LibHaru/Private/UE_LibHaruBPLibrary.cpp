@@ -4,8 +4,8 @@
 #include "UE_LibHaru.h"
 
 // UE Includes.
-#include "Kismet/KismetStringLibrary.h"
 #include "ImageUtils.h"
+#include "Kismet/KismetStringLibrary.h"
 #include "Engine/TextureRenderTarget2D.h"
 
 THIRD_PARTY_INCLUDES_START
@@ -14,6 +14,8 @@ THIRD_PARTY_INCLUDES_START
 // LibHaru Includes
 #include "hpdf_u3d.h"
 THIRD_PARTY_INCLUDES_END
+
+#pragma warning(disable:6011)
 
 FString Dec_To_Hex(HPDF_STATUS Result)
 {
@@ -444,20 +446,64 @@ void UUE_LibHaruBPLibrary::LibHaru_Add_Texts(FDelegateLibharu DelegateAddObject,
 	);
 }
 
-HPDF_Image PDF_Image_Callback(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FColor TransparentColor)
+HPDF_Image PDF_Image_Callback(UPARAM(ref)ULibHaruDoc*& In_PDF, UObject* Target_Image, FColor TransparentColor, FVector2D& Size)
 {
-	int32 Texture_Width = Target_Image->GetSizeX();
-	int32 Texture_Height = Target_Image->GetSizeY();
+	TArray64<uint8_t> Bytes;
+	
+	UTexture2D* Texture2D = Cast<UTexture2D>(Target_Image);
+	
+	if (Texture2D)
+	{
+		Size = FVector2D(Texture2D->GetSizeX(), Texture2D->GetSizeY());
 
-	FImage Image;
-	FImageUtils::GetTexture2DSourceImage(Target_Image, Image);
+#if WITH_EDITOR
+		
+		FImage Image;
+		FImageUtils::GetTexture2DSourceImage(Texture2D, Image);
+
+		Bytes.SetNum(Image.RawData.Num());
+		FMemory::Memcpy(Bytes.GetData(), Image.RawData.GetData(), Image.RawData.Num());
+
+		UE_LOG(LogTemp, Display, TEXT("LibHaru PDF : Texture2D image insertion from Unreal editor."))
+#else
+		
+		if (Texture2D->GetPixelFormat() == EPixelFormat::PF_B8G8R8A8)
+		{
+			FTexture2DMipMap& Texture_Mip = Texture2D->GetPlatformData()->Mips[0];
+			void* Texture_Data = Texture_Mip.BulkData.Lock(LOCK_READ_WRITE);
+
+			Bytes.SetNum(Size.X * Size.Y * 4);
+			FMemory::Memcpy(Bytes.GetData(), (uint8_t*)Texture_Data, Size.X * Size.Y * 4);
+
+			Texture_Mip.BulkData.Unlock();
+
+			UE_LOG(LogTemp, Display, TEXT("LibHaru PDF : Texture2D image insertion from runtime."))
+		}
+
+#endif // WITH_EDITOR
+	}
+
+	UTextureRenderTarget2D* TRT2D = Cast<UTextureRenderTarget2D>(Target_Image);
+	
+	if (TRT2D)
+	{
+		Size = FVector2D(TRT2D->SizeX, TRT2D->SizeY);
+		FImageUtils::GetRawData(TRT2D, Bytes);
+
+		UE_LOG(LogTemp, Display, TEXT("LibHaru PDF : TextureRenderTarget2D image insertion."))
+	}
+
+	if (!Texture2D && !TRT2D)
+	{
+		UE_LOG(LogTemp, Display, TEXT("LibHaru PDF : There is no image to read."))
+		return nullptr;
+	}
 
 	TArray<FColor> Array_Colors;
-	Array_Colors.SetNum(Texture_Width * Texture_Height);
-	FMemory::Memcpy(Array_Colors.GetData(), Image.RawData.GetData(), static_cast<SIZE_T>(Image.RawData.Num()));
+	Array_Colors.SetNum(Size.X * Size.Y);
+	FMemory::Memcpy(Array_Colors.GetData(), Bytes.GetData(), Bytes.Num());
 
 	HPDF_BYTE* Buffer = (unsigned char*)malloc(static_cast<size_t>(Array_Colors.Num()) * 3);
-	
 	for (int32 Index_Colors = 0; Index_Colors < Array_Colors.Num(); Index_Colors++)
 	{
 		if (Array_Colors[Index_Colors].A == 0)
@@ -475,12 +521,12 @@ HPDF_Image PDF_Image_Callback(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Targe
 		}
 	}
 
-	HPDF_Image PDF_Image = HPDF_LoadRawImageFromMem(In_PDF->Document, Buffer, Texture_Width, Texture_Height, HPDF_ColorSpace::HPDF_CS_DEVICE_RGB, 8);
+	HPDF_Image PDF_Image = HPDF_LoadRawImageFromMem(In_PDF->Document, Buffer, Size.X, Size.Y, HPDF_ColorSpace::HPDF_CS_DEVICE_RGB, 8);
 
 	return PDF_Image;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UTexture2D* Target_Image, FColor TransparentColor, FVector2D Position, int32 Page_Index)
+bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UObject* Target_Image, FColor TransparentColor, FVector2D Position, int32 Page_Index)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -492,14 +538,15 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UT
 		return false;
 	}
 
-	if (IsValid(Target_Image) == false)
+	if (!Target_Image)
 	{
 		return false;
 	}
 
-	HPDF_Image PDF_Image = PDF_Image_Callback(In_PDF, Target_Image, TransparentColor);
+	FVector2D Size;
+	HPDF_Image PDF_Image = PDF_Image_Callback(In_PDF, Target_Image, TransparentColor, Size);
 	HPDF_Page Target_Page = HPDF_GetPageByIndex(In_PDF->Document, Page_Index);
-	HPDF_STATUS Result = HPDF_Page_DrawImage(Target_Page, PDF_Image, Position.X, Position.Y, Target_Image->GetSizeX(), Target_Image->GetSizeY());
+	HPDF_STATUS Result = HPDF_Page_DrawImage(Target_Page, PDF_Image, Position.X, Position.Y, Size.X, Size.Y);
 
 	if (Result == 0)
 	{
