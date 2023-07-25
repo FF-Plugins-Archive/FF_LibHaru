@@ -9,7 +9,7 @@ https://github.com/FF-Projects-UE/ExtendedVars
 
 # TARGET PLATFORM
 * It currently only works on Windows platform.
-* It supports only <b>latest released version of Unreal Engine.</b>. We can't help you if you want to use older ones. Moving to latest version takes approximately one month.
+* It supports only <b>latest released version of Unreal Engine</b>. We can't help you if you want to use older ones. Moving to latest version takes approximately one month.
 
 # LIBHARU WRITE FUNCTIONS
 * <b>LibHaru - Create Document</b>: It creates a LibHaru based PDF file. It's object is different than PDFium's. So, you can't merge them unless export it and then re-import it, first.
@@ -39,3 +39,10 @@ https://github.com/FF-Projects-UE/ExtendedVars
 * <b>LibHaru - Save as Bytes</b>: It saves PDF as bytes array (TArray<uint8>). So, you can render it with PDFium without writing and reading a PDF file.
 
 * <b>LibHaru - Close Document</b> 
+
+# IMPORTANT
+In order to insert images to PDF files in runtime, you have to do these changes for your textures. <br />
+Runtime imported textures are generally transient PF_B8G8R8A8 without compression. They can work without problem. <br />
+* Texture Group as UI
+* MipGen Settings as NoMipMaps
+* CompressionSettings as UserInterface2D
