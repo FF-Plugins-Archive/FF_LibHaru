@@ -14,7 +14,7 @@ https://github.com/FF-Projects-UE/ExtendedVars
 
 * <b>LibHaru - Add Pages</b>: It adds pages to target PDF file with defined size. (Array count is page count and each vector element of array is its size)
 
-* <b>LibHaru - Load Standart Font</b>: There are 14 standart fonts embedded to PDF libraries according to PDF Spec 1.7 page 416. This function allows to select one them. These fonts don't support extended characters (Turkish, Cyrillic and Asian). If you want to use that kind of chars, you have to find and use use external fonts.
+* <b>LibHaru - Load Standart Font</b>: There are 14 standart fonts embedded to PDF libraries according to PDF Spec 1.7 page 416. This function allows to select one them. These fonts don't support extended characters (Turkish, Cyrillic and Asian). If you want to use that kind of chars, you have to find and use external fonts.
 
 * <b>LibHaru - Load External Font</b>:
 
@@ -39,7 +39,7 @@ https://github.com/FF-Projects-UE/ExtendedVars
 * <b>LibHaru - Close Document</b> 
 
 # IMPORTANT
-In order to insert images to PDF files in runtime, you have to do these changes for your textures. <br />
+In order to insert images to PDF files in runtime, you have to do these changes for your textures. Because currently DXT texture aren't supported in runtime. But you can use them for editor-only projects.<br />
 Runtime imported textures are generally transient PF_B8G8R8A8 without compression. They can work without problem. <br />
 * Texture Group as UI
 * MipGen Settings as NoMipMaps
