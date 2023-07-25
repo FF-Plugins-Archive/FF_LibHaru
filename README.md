@@ -1,3 +1,6 @@
+# NOTE
+We frequently checking our issues. If you have a problem, open an issue. Not send us an email. If problem is about us and we can help you, we will help you. Sending an email won't change our response speed.
+
 # USED LIBRARY
 LibHaru (We didn't use ZLIB, LIBJPEG or LIBPNG) <br />
 https://github.com/libharu/libharu
