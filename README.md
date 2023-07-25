@@ -1,5 +1,3 @@
-# UE_LibHaru
-
 # USED LIBRARY
 LibHaru (We didn't use ZLIB, LIBJPEG or LIBPNG) <br />
 https://github.com/libharu/libharu
