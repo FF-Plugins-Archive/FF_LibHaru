@@ -9,7 +9,7 @@ https://github.com/FF-Projects-UE/ExtendedVars
 
 # TARGET PLATFORM
 * It currently only works on Windows platform.
-* It supports only <b>latest editor versions</b>.
+* It supports only <b>latest released version of Unreal Engine.</b>. We can't help you if you want to use older ones. Moving to latest version takes approximately one month.
 
 # LIBHARU WRITE FUNCTIONS
 * <b>LibHaru - Create Document</b>: It creates a LibHaru based PDF file. It's object is different than PDFium's. So, you can't merge them unless export it and then re-import it, first.
