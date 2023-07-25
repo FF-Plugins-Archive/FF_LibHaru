@@ -14,7 +14,7 @@ https://github.com/FF-Projects-UE/ExtendedVars
 
 * <b>LibHaru - Add Pages</b>: It adds pages to target PDF file with defined size. (Array count is page count and each vector element of array is its size)
 
-* <b>LibHaru - Load Standart Font</b>: There are 14 standart fonts embedded to PDF libraries according to PDF Spec 1.7 page 416. This function allows to select one them.
+* <b>LibHaru - Load Standart Font</b>: There are 14 standart fonts embedded to PDF libraries according to PDF Spec 1.7 page 416. This function allows to select one them. These fonts don't support extended characters (Turkish, Cyrillic and Asian). If you want to use that kind of chars, you have to find and use use external fonts.
 
 * <b>LibHaru - Load External Font</b>:
 
