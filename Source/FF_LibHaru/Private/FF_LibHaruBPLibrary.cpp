@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "UE_LibHaruBPLibrary.h"
-#include "UE_LibHaru.h"
+#include "FF_LibHaruBPLibrary.h"
+#include "FF_LibHaru.h"
 
 // UE Includes.
 #include "ImageUtils.h"
@@ -26,13 +26,13 @@ FString Dec_To_Hex(HPDF_STATUS Result)
 	return String.c_str();
 }
 
-UUE_LibHaruBPLibrary::UUE_LibHaruBPLibrary(const FObjectInitializer& ObjectInitializer)
+UFF_LibHaruBPLibrary::UFF_LibHaruBPLibrary(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
 {
 
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Create_Doc(ULibHaruDoc*& Out_PDF)
+bool UFF_LibHaruBPLibrary::LibHaru_Create_Doc(ULibHaruDoc*& Out_PDF)
 {
 	HPDF_Doc PDF_Document = HPDF_New(NULL, NULL);
 	PDF_Document->pdf_version = HPDF_VER_17;
@@ -50,7 +50,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Create_Doc(ULibHaruDoc*& Out_PDF)
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Pages(UPARAM(ref)ULibHaruDoc*& In_PDF, TArray<FVector2D> Pages, bool bInsertInstead, int32 InsertAfter)
+bool UFF_LibHaruBPLibrary::LibHaru_Add_Pages(UPARAM(ref)ULibHaruDoc*& In_PDF, TArray<FVector2D> Pages, bool bInsertInstead, int32 InsertAfter)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -91,7 +91,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Pages(UPARAM(ref)ULibHaruDoc*& In_PDF, TA
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Load_Font_Standart(ULibHaruFont*& Out_Font, UPARAM(ref)ULibHaruDoc*& In_PDF, EStandartFonts Font_Name, EFontEncodings Font_Encoding)
+bool UFF_LibHaruBPLibrary::LibHaru_Load_Font_Standart(ULibHaruFont*& Out_Font, UPARAM(ref)ULibHaruDoc*& In_PDF, EStandartFonts Font_Name, EFontEncodings Font_Encoding)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -259,7 +259,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Load_Font_Standart(ULibHaruFont*& Out_Font, U
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Load_Font_External(ULibHaruFont*& Out_Font, UPARAM(ref)ULibHaruDoc*& In_PDF, FString In_Path)
+bool UFF_LibHaruBPLibrary::LibHaru_Load_Font_External(ULibHaruFont*& Out_Font, UPARAM(ref)ULibHaruDoc*& In_PDF, FString In_Path)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -300,7 +300,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Load_Font_External(ULibHaruFont*& Out_Font, U
 	return true;
 }
 
-void UUE_LibHaruBPLibrary::LibHaru_Add_Texts(FDelegateLibharu DelegateAddObject, UPARAM(ref)ULibHaruDoc*& In_PDF, UPARAM(ref)ULibHaruFont*& In_Font, FString In_Texts, FLinearColor Text_Color, FVector2D Position, FVector2D Size, FVector2D Rotation, FVector2D Border, int32 FontSize, int32 PageIndex)
+void UFF_LibHaruBPLibrary::LibHaru_Add_Texts(FDelegateLibharu DelegateAddObject, UPARAM(ref)ULibHaruDoc*& In_PDF, UPARAM(ref)ULibHaruFont*& In_Font, FString In_Texts, FLinearColor Text_Color, FVector2D Position, FVector2D Size, FVector2D Rotation, FVector2D Border, int32 FontSize, int32 PageIndex)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -542,7 +542,7 @@ HPDF_Image PDF_Image_Callback(UPARAM(ref)ULibHaruDoc*& In_PDF, UObject* Target_I
 	return PDF_Image;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UObject* Target_Image, FColor TransparentColor, FVector2D Position, int32 Page_Index)
+bool UFF_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UObject* Target_Image, FColor TransparentColor, FVector2D Position, int32 Page_Index)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -575,7 +575,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Image(UPARAM(ref)ULibHaruDoc*& In_PDF, UO
 	}
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_U3D(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Model_Path, FVector2D Position, FVector2D Size, int32 Zoom, FLinearColor BG_Color, int32 Page_Index)
+bool UFF_LibHaruBPLibrary::LibHaru_Add_U3D(UPARAM(ref)ULibHaruDoc*& In_PDF, FString Model_Path, FVector2D Position, FVector2D Size, int32 Zoom, FLinearColor BG_Color, int32 Page_Index)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -632,7 +632,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_U3D(UPARAM(ref)ULibHaruDoc*& In_PDF, FStr
 	}
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Start, FVector2D End, int32 Width, FLinearColor Line_Color, int32 Page_Index)
+bool UFF_LibHaruBPLibrary::LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Start, FVector2D End, int32 Width, FLinearColor Line_Color, int32 Page_Index)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -654,7 +654,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Line(UPARAM(ref)ULibHaruDoc*& In_PDF, FVe
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Rectangle(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Dimensions, int32 Width, FLinearColor Line_Color, int32 Page_Index)
+bool UFF_LibHaruBPLibrary::LibHaru_Add_Rectangle(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Dimensions, int32 Width, FLinearColor Line_Color, int32 Page_Index)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -675,7 +675,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Rectangle(UPARAM(ref)ULibHaruDoc*& In_PDF
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Arc(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Angles, double Radius, int32 Width, FLinearColor Line_Color, int32 Page_Index)
+bool UFF_LibHaruBPLibrary::LibHaru_Add_Arc(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Angles, double Radius, int32 Width, FLinearColor Line_Color, int32 Page_Index)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -696,7 +696,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Arc(UPARAM(ref)ULibHaruDoc*& In_PDF, FVec
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Circle(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, double Radius, int32 Width, FLinearColor Line_Color, int32 Page_Index)
+bool UFF_LibHaruBPLibrary::LibHaru_Add_Circle(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, double Radius, int32 Width, FLinearColor Line_Color, int32 Page_Index)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -717,7 +717,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Circle(UPARAM(ref)ULibHaruDoc*& In_PDF, F
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Add_Ellipse(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Radii, int32 Width, FLinearColor Line_Color, int32 Page_Index)
+bool UFF_LibHaruBPLibrary::LibHaru_Add_Ellipse(UPARAM(ref)ULibHaruDoc*& In_PDF, FVector2D Location, FVector2D Radii, int32 Width, FLinearColor Line_Color, int32 Page_Index)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -738,7 +738,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Add_Ellipse(UPARAM(ref)ULibHaruDoc*& In_PDF, 
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Save_File(UPARAM(ref)ULibHaruDoc*& In_PDF, FString& OutCode, FString Export_Path)
+bool UFF_LibHaruBPLibrary::LibHaru_Save_File(UPARAM(ref)ULibHaruDoc*& In_PDF, FString& OutCode, FString Export_Path)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -769,7 +769,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Save_File(UPARAM(ref)ULibHaruDoc*& In_PDF, FS
 	}
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Save_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF, UBytesObject_64*& Out_Bytes)
+bool UFF_LibHaruBPLibrary::LibHaru_Save_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF, UBytesObject_64*& Out_Bytes)
 {
 	if (IsValid(In_PDF) == false)
 	{
@@ -805,7 +805,7 @@ bool UUE_LibHaruBPLibrary::LibHaru_Save_Bytes(UPARAM(ref)ULibHaruDoc*& In_PDF, U
 	return true;
 }
 
-bool UUE_LibHaruBPLibrary::LibHaru_Close_Document(UPARAM(ref)ULibHaruDoc*& In_PDF)
+bool UFF_LibHaruBPLibrary::LibHaru_Close_Document(UPARAM(ref)ULibHaruDoc*& In_PDF)
 {
 	if (IsValid(In_PDF) == false)
 	{

@@ -4,7 +4,7 @@
 
 #include "Modules/ModuleManager.h"
 
-class FUE_LibHaruModule : public IModuleInterface
+class FFF_LibHaruModule : public IModuleInterface
 {
 public:
 

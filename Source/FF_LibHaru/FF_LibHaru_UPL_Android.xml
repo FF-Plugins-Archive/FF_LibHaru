@@ -2,7 +2,7 @@
 <root xmlns:android="http://schemas.android.com/apk/res/android">
 	<!-- init section is always evaluated once per architecture -->
 	<init>
-		<log text="UE_LibHaru"/>
+		<log text="FF_LibHaru"/>
 		<setBool result="bCpuArchSupported" value="false"/>
 		<isArch arch="arm64-v8a">
 			<setBool result="bCpuArchSupported" value="true"/>
@@ -26,7 +26,7 @@
 		<if condition="bCpuArchSupported">
 			<true>
 				
-				<loadLibrary name="libhpdf" failmsg="libhpdf library not loaded and may be required for UE_LibHaru." />
+				<loadLibrary name="libhpdf" failmsg="libhpdf library not loaded and may be required for FF_LibHaru." />
 				
 			</true>
 		</if>

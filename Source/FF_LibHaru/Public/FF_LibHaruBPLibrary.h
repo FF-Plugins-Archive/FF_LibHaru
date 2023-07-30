@@ -15,10 +15,10 @@ THIRD_PARTY_INCLUDES_END
 
 #include "ExtendedVarsBPLibrary.h"
 
-#include "UE_LibHaruBPLibrary.generated.h"
+#include "FF_LibHaruBPLibrary.generated.h"
 
 UCLASS(BlueprintType)
-class UE_LIBHARU_API ULibHaruDoc : public UObject
+class FF_LIBHARU_API ULibHaruDoc : public UObject
 {
 	GENERATED_BODY()
 
@@ -28,7 +28,7 @@ public:
 };
 
 UCLASS(BlueprintType)
-class UE_LIBHARU_API ULibHaruFont : public UObject
+class FF_LIBHARU_API ULibHaruFont : public UObject
 {
 	GENERATED_BODY()
 
@@ -41,7 +41,7 @@ UDELEGATE(BlueprintAuthorityOnly)
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FDelegateLibharu, bool, bIsSuccessfull, FString, OutCode);
 
 UCLASS()
-class UUE_LibHaruBPLibrary : public UBlueprintFunctionLibrary
+class UFF_LibHaruBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 

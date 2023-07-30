@@ -4,15 +4,15 @@ using System;
 using System.IO;
 using UnrealBuildTool;
 
-public class UE_LibHaru : ModuleRules
+public class FF_LibHaru : ModuleRules
 {
-	public UE_LibHaru(ReadOnlyTargetRules Target) : base(Target)
+	public FF_LibHaru(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
         if (UnrealTargetPlatform.Win64 == Target.Platform)
         {
-            string Location_Libharu = "../Source/UE_LibHaru/ThirdParty/libharu/Windows/include";
+            string Location_Libharu = "../Source/FF_LibHaru/ThirdParty/libharu/Windows/include";
             PrivateIncludePaths.Add(Location_Libharu);
 
             PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "ThirdParty", "libharu", "Windows", "lib", "hpdf.lib"));
@@ -23,12 +23,12 @@ public class UE_LibHaru : ModuleRules
             // We need it for #include "AndroidPlatform.h" in fpdview.h. Because default #define DLLEXPORT makes clash with Unreal's defination. We comment it out and include AndroidPlatform.h
             PublicIncludePaths.Add(Path.Combine(EngineDirectory, "Source", "Runtime", "Core", "Public", "Android"));
 
-            string Location_Libharu = "../Source/UE_LibHaru/ThirdParty/libharu/Android/include";
+            string Location_Libharu = "../Source/FF_LibHaru/ThirdParty/libharu/Android/include";
             PrivateIncludePaths.Add(Location_Libharu);
 
             PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "ThirdParty", "libharu", "Android", "lib", "arm64-v8a", "libhpdf.so"));
 
-            AdditionalPropertiesForReceipt.Add("AndroidPlugin", Path.Combine(ModuleDirectory, "UE_LibHaru_UPL_Android.xml"));
+            AdditionalPropertiesForReceipt.Add("AndroidPlugin", Path.Combine(ModuleDirectory, "FF_LibHaru_UPL_Android.xml"));
         }
 
         PublicDependencyModuleNames.AddRange(
