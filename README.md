@@ -9,11 +9,11 @@ https://github.com/libharu/libharu
 https://github.com/FF-Projects-UE/ExtendedVars
 
 # TARGET PLATFORM AND ENGINE
-* It currently only works on Windows platform.
-* It supports only <b>latest released version of Unreal Engine</b>. We can't help you if you want to use older ones. Moving to latest version takes approximately one month.
+* It only works on Windows platform (both development and build)
 * It supports current launcher version of engine.
   * We update engine version after one month of new release.
   * For example current version is 5.3 but it is not 1 month old. So, we support 5.2. But after that, we will support only 5.3. This will be same for all future versions.
+  * Don't ask us about older engine versions.
 
 # USAGE
 * Open a C++ project with correct engine version.
