@@ -19,6 +19,7 @@ https://github.com/FF-Projects-UE/ExtendedVars
 * Open a C++ project with correct engine version.
 * Generate Visual Studio Project Files
 * Press F5 in Visual Studio to build plugin and open your project.
+* There is a sample blueprints in plugin's content folder.
 
 # LIBHARU WRITE FUNCTIONS
 * <b>LibHaru - Create Document</b>: It creates a LibHaru based PDF file. It's object is different than PDFium's. So, you can't merge them unless export it and then re-import it, first.
